@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Form</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    .error { color: red; }
+    .success { color: green; }
+  </style>
+</head>
+<body>
+
+  <form id="loginForm">
+    <label>Email:</label><br />
+    <input type="text" id="email" name="email" /><br />
+    <span class="error" id="emailError"></span><br />
+
+    <label>Password:</label><br />
+    <input type="password" id="password" name="password" /><br />
+    <span class="error" id="passwordError"></span><br />
+
+    <button type="submit">Login</button>
+  </form>
+
+  <div id="responseMessage"></div>
+
+  <script>
+    $(document).ready(function() {
+      $('#loginForm').on('submit', function(e) {
+        e.preventDefault();
+
+        // Clear previous errors
+        $('#emailError').text('');
+        $('#passwordError').text('');
+        $('#responseMessage').text('').removeClass('error success');
+
+        const email = $('#email').val().trim();
+        const password = $('#password').val().trim();
+
+        let isValid = true;
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email) {
+          $('#emailError').text('Email is required.');
+          isValid = false;
+        } else if (!emailRegex.test(email)) {
+          $('#emailError').text('Invalid email format.');
+          isValid = false;
+        }
+
+        // Password validation
+        if (!password) {
+          $('#passwordError').text('Password is required.');
+          isValid = false;
+        } else if (password.length < 6) {
+          $('#passwordError').text('Password must be at least 6 characters.');
+          isValid = false;
+        }
+
+        // Proceed with AJAX if valid
+        if (isValid) {
+          $.ajax({
+            url: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDN5Odz2EokBzEiDgtmPuWn_tz4toWipIQ', // Change to your API URL
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ email, password }),
+            success: function(response) {
+              $('#responseMessage')
+                .text('Login successful!')
+                .addClass('success');
+              // Do something with the response, like redirect
+            },
+            error: function(xhr) {
+              $('#responseMessage')
+                .text('Login failed. Please check your credentials.')
+                .addClass('error');
+            }
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

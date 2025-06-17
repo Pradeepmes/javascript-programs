@@ -1,0 +1,392 @@
+
+
+
+ 
+
+
+1️“How would you improve the performance of a React app?”
+I listed basic answers like lazy loading and splitting bundles. But they pushed me further: “Why do these techniques work?” That’s when I realized I needed to understand concepts like rendering cycles and browser behavior.
+
+2️“What happens when you type a URL and press Enter?”
+This wasn’t just about frontend—it was about understanding the entire web stack. I learned to explain DNS resolution, server requests, and rendering pipelines.
+
+3️“How do you approach debugging?”
+They didn’t care about tools—they wanted to see my thought process. It taught me that structured debugging (e.g., isolating issues step-by-step) is more valuable than memorizing solutions.
+
+
+1. React Search Bar Functionality - Implementing it with an API call 
+
+2. Debouncing for performance optimization
+
+3. Lazy Loading - Making the app more efficient 
+
+4. How to improve React performance?
+
+5. JavaScript Output Questions: Event loop, closures, lexical scope, hoisting (detailed explanation required!) 
+
+6. Types vs. Interfaces in TypeScript 
+
+🧵 ...But wait, there's more!
+
+7.React Hooks deep dive: useEffect, useCallback, useMemo, useRef, useState
+
+8. Custom Hooks vs. Utility Functions 
+
+9. Error Handling best practices
+
+10. Popular Array Methods (map & filter) and String Methods (slice, startsWith, splice)
+
+11. Prop Drilling & how to manage state better in React 
+
+12. CSS Positioning - Got a fun challenge with some real-world examples! 
+
+ Explain the virtual DOM in React and how it optimizes rendering.
+
+○ What are React Hooks, and why did they replace lifecycle methods in many cases?
+
+○ Define Higher-Order Components (HOCs) and describe scenarios for using them.
+
+○ How does the Context API work, and when should it be used over props for global state?
+
+○ Describe React's reconciliation process and how it updates the DOM efficiently.
+
+○ What is "lifting state up" in React, and why is it useful?
+
+○ Explain useReducer and compare it with useState for managing component state.
+
+○ List strategies for improving the performance of a React app.
+
+○ What role do keys play in React lists, and how do they affect rendering?
+
+○ Describe React Portals and provide examples of when they’re useful.
+
+○ Explain the pros and cons of server-side rendering (SSR) in Next.js.
+
+○ How does code splitting enhance a React app's performance, and how can it be implemented?
+
+○ What are custom hooks, and how do they support code reuse?
+
+○ Define controlled and uncontrolled components in form handling.
+
+○ How do you manage side effects in React using hooks?
+
+○ Compare Redux and Context API as options for state management in React.
+
+○ What are fragments, and why might you use them instead of div wrappers?
+
+○ How does React handle synthetic events differently than vanilla JavaScript?
+
+○ Describe suspense and lazy loading in React and their use cases.
+
+○ How does React.memo work, and how can it help reduce unnecessary renders?
+
+○ What are common pitfalls when using useEffect, and how can you avoid them?
+
+○ How do error boundaries work in React, and when should you implement them?
+
+○ Explain optimistic vs. pessimistic updates and provide examples of each.
+
+○ What is PropTypes, and how does it improve component reliability?
+
+○ Describe how you would add dark mode functionality in a React app.
+
+○ What benefits does a CSS-in-JS solution bring to React, and what are some examples?
+
+○ Compare useRef and createRef, and describe use cases for each.
+
+○ What are the best methods for data fetching in React components?
+
+○ List best practices for organizing and structuring a React project.
+
+○ How do you create complex animations in React, and which libraries can help?
+
+LtImindtree question
+1. How would you center a div inside a div?
+2. Tree shaking and bundling in modern JavaScript applications.
+3. Have you worked with any state management libraries like Zustand?
+4. Techniques for React performance optimization.
+5. Write a function to check if a string is a palindrome without using the reverse string logic.
+6. What's the output of console.log(this)?
+7. Difference between arrow functions and regular JavaScript functions.
+8. Write a program to create a promise and an async/await function.
+9. Several output-based questions on var keyword, hoisting, and async/await.
+10. What are closures in JavaScript?
+11. If you receive 5000 records in one API call, how would you efficiently display them in a dropdown?
+12. How is async/await different from promises?
+13. What do the caret (^) and tilde (~) signs represent in package.json?
+14. What are dev dependencies in package.json?
+15. What is Node.js and the event loop?
+16. Can you explain hoisting in JavaScript? For example: output of the below code.
+a = 10;
+console.log(a);
+var a;
+17. How does "this" behave in Node.js? Is it the same as in a browser console?
+18. Write code for mul(2)(3)(4) = 24.
+19. Have you worked with Axios? What are interceptors in Axios?
+20. Why do we need the useRef hook in React?
+
+Justpay question
+🔗 React:
+1. How does React work?
+2. What is a hook? Examples and how they work.
+3. What is state in React?
+4. Different types of useEffect (no array, empty array, array with elements).
+5. What is the useCallback() hook in React, and when is it used?
+6. How are changes applied to the real DOM from the Virtual DOM?
+7. Can we develop multi-page applications along with SPA using React?
+8. Explain how global state management works, with an example.
+9. What does Redux do? What’s an alternative to Redux for state management?
+10. What is an SPA, and what are the drawbacks of using one?
+11. How would you optimize a web app?
+12. Difference between useMemo and useCallback.
+13. Types of navigation in React Native.
+14. What are package.json and package-lock.json?
+
+🔗 JavaScript​:
+15. What are Promises in JS, and how do they work?
+16. What is async and await in JS?
+17. How does setTimeout() work in a single-threaded environment?
+18. Explain currying in JS.
+19. Difference between arrow functions and normal functions.
+
+Note: will post pre qualifiers questions/pre interview assignments next, stay tuned.
+
+
+Wipro React 
+1) Microfrontend? how to handle data from one app to another
+2) Interceptor
+3) Useeffect in strict mode render twice ? how to overcome  Ans :useEffect(() => {
+  console.log("Effect triggered!");
+
+  return () => {  //Use cleanup functions inside the effect to properly handle unmounting behavior.Write effects that are idempotent,
+  //meaning they should produce the same result even if executed multiple times.
+    console.log("Effect cleanup!");
+  };
+}, []);
+4) media qury max width 600px and min width 600px what will happen
+5) how to handle api failure inside error boundary
+6) what is api authorisation fails error code
+7) Router in react
+
+
+
+8) how to configure webpack and vlite
+
+Typescript......
+1) difference between interface and generic
+
+
+Quess Interview vue
+L1
+1)what is position absolute 
+2)css specificity
+3)display property and there difference
+4)display flex and grid
+5)difference between vue and react
+6) lifecycle method in vue
+7) how to optimize performance of vue js applications
+8) Api call through axios
+
+
+
+Capegemini vuejs:
+ 
+1)how to do peer review  ....ANS..(clarity and readability,it should follow naming conventions,aviod duplicate logic, it should follow teams coding conventions, 
+if variables, functions, and classes are appropriately named and if the logic is clearly expressed,Clear code makes it easier to maintain, debug,)
+2)how to handle the requirements
+2.2)unit testing and end to end testing
+
+3)mutation
+✅State updates should only happen inside mutations
+✅ Mutations must be synchronous
+✅ Mutations receive state as the first argument and payload as the second
+
+
+4)array detection methods
+5)life cycle hooks
+6)send data from parent to child 
+7)how to emit event from child to parent
+8)performance optimization
+9)git commands
+10)what is the root entry point of vuejs app
+11)Api call
+
+
+
+
+brillio
+
+Monjin
+
+Apexon
+1 Different types of forms in react
+2) How to find performance issue in react
+3) Write Higher-Order component example
+4) write custom hooks
+5) what hooks have use used
+6) Diffrenece between promiseall and promise allsetled
+7) code snippet 
+8) what are the techinges to avoid rerendering
+
+intuit(third party)
+1) find duplicate
+2) Write a function
+
+deepEqual(obj1, obj2)
+
+that takes in two objects as arguments and returns true if they are deeply equal (have the same properties with the same values), and false otherwise. The function should handle properties with object or array values recursively.
+ 
+Example:
+ 
+const obj1 = {
+  name: 'John',
+  age: 30,
+  address: {
+    street: '123 Main St',
+    city: 'Anytown',
+    state: 'CA'
+  },
+  hobbies: ['reading', 'traveling', 'music']
+};
+
+const obj2 = {
+  name: 'John',
+  age: 30,
+  address: {
+    street: '123 Main St',
+    city: 'Anytown',
+    state: 'CA'
+  },
+  hobbies: ['reading', 'traveling', 'music']
+
+};
+
+
+1) sort array in descending order
+
+const arr = [1, -1, 10, 20, 2, 3, 8]
+	const output = arr.sort((a,b)=>{
+		return b-a
+	})
+	console.log(output)
+
+2) function add(a = 3, b = 4) { 
+    return a + b;
+	}
+	add(); 7
+	add(5); 7
+	add(null, 10); 
+	add(undefined, 10);
+
+3) let user = { name: "ABCD" };
+	let person = user;
+	person.name = "EFGH";
+	console.log(user.name);
+	
+
+2) diff between call bind and apply =done
+3) diff between for and for Each =done
+4) array methods =done
+5) how to send data from child to parent =done
+6) find and filter =done
+
+
+Lumen Technologies(Vuejs)
+
+1) Write keyboard eventhandler=done
+
+3) fetch data from api and sort employee name in asending and department in descending order =done
+4) databinding  =done
+5) what is prop =done
+
+
+1)eventhandler =done
+2)send data as props and show that message as reverse  ==done
+3) aync/await  ==done
+4)sass  done
+
+
+
+
+React(virtusa)
+1)Here’s a JavaScript function that doubles a number the first time it’s called, then returns a message saying the function has already been called if run again:
+2) To create a button in React that changes color on each click, you can use a useState hook to manage the button's color state. =done
+
+React(Virtusa JPMC)
+1)how to find second largest number in array=  done
+2) how to implememnt inside Useeffect hooks the lifecycle method . Without componentDidMount how we can implement =done
+3) when to use Vue and React =done
+4) suppose there is one parent component and in parent we have input box and that need to update in child component .how we czn achieve in react? =done
+
+React(Tesco 29/01/25)
+1)how javascript work pass by value or pass by reference = in progress
+2)what are different types of props = in progress
+3)diff between generic and union | generic and any
+4)swap two string without using 3rd varibale
+
+Ans) let str = "hello";
+let data = "string";
+[str, data] = [data, str];
+console.log(str)
+console.log(data)
+
+
+9) debouncing and throtlling
+10) how to handle props
+Ans: "In React, props are used to pass data from a parent to a child component. We can destructure props, use default values, 
+enforce type checking with prop-types, pass functions as callbacks, and optimize renders with React.memo(). Props help create reusable, dynamic components."
+
+
+11) write HOC syntax
+12) write context API syntax
+13) how to pass data from two different component
+14) what is proxy object
+Ans: proxy object is used to create object that can be used in place of original object
+
+15) what event.current atrget and event.target ->
+Ans: event.target targets the child element (where the event occurred)
+	 event.currentTarget targets the parent element (where the event listener is attached)
+	   
+16)what is event delegation.limitation of it
+ANS:-> Event delegation is a powerful technique that allows you to handle events efficiently by 
+       using a single event listener on a parent element, rather than attaching listeners to each individual child element
+	   
+	   limitations: related to event targeting, performance with deeply nested elements
+17)   event bubbling or event capturing
+Ans-> event capturing:- The event is caught first by the outermost element and travels down to the innermost element.
+
+      <div class="parent">
+		  <button class="child">Click Me</button>
+		</div>
+
+		<script>
+		  const parent = document.querySelector('.parent');
+		  const button = document.querySelector('.child');
+
+		  parent.addEventListener('click', function() {
+			console.log('Parent clicked');
+		  }, true);  // `true` enables capturing
+
+		  button.addEventListener('click', function() {
+			console.log('Button clicked');
+		  });
+		</script>
+
+      event bubbling:-event target at the innermost element and "bubbles up" to the root element
+	  <div class="parent">
+		  <button class="child">Click Me</button>
+		</div>
+
+		<script>
+		  const parent = document.querySelector('.parent');
+		  const button = document.querySelector('.child');
+
+		  parent.addEventListener('click', function() {
+			console.log('Parent clicked');
+		  });
+
+		  button.addEventListener('click', function() {
+			console.log('Button clicked');
+		  });
+		</script>
+

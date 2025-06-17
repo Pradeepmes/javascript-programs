@@ -1,0 +1,127 @@
+1) sort array in descending order
+
+const arr = [1, -1, 10, 20, 2, 3, 8]
+	const output = arr.sort((a,b)=>{
+		return b-a
+	})
+	console.log(output)
+=====================================
+
+deepEqual(obj1, obj2)
+
+that takes in two objects as arguments and returns true if they are deeply equal (have the same properties with the same values), and false otherwise. The function should handle properties with object or array values recursively.
+ 
+ Example:
+ 
+const obj1 = {
+  name: 'John',
+  age: 30,
+  address: {
+    street: '123 Main St',
+    city: 'Anytown',
+    state: 'CA'
+  },
+  hobbies: ['reading', 'traveling', 'music']
+};
+
+const obj2 = {
+  name: 'John',
+  age: 30,
+  address: {
+    street: '123 Main St',
+    city: 'Anytown',
+    state: 'CA'
+  },
+  hobbies: ['reading', 'traveling', 'music']
+
+};
+========================================================
+
+sort array in descending order
+
+const arr = [1, -1, 10, 20, 2, 3, 8]
+	const output = arr.sort((a,b)=>{
+		return b-a
+	})
+	console.log(output)
+	
+	
+====================================================
+display
+
+1 2 3 4
+1 2 3 4
+1 2 3 4
+
+let output = "";
+
+for (let row = 0; row < 4; row++) {
+  for (let num = 1; num <= 4; num++) {
+    output += num + " ";
+  }
+  output += "\n"; // Move to next line after each row
+}
+====================================================
+how to find second largest number in array
+
+function getSecondLargest(arr) {
+  const unique = [...new Set(arr)]; // remove duplicates
+  unique.sort((a, b) => b - a); // sort descending
+  return unique[1]; // second element is the second largest
+}
+
+const numbers = [5, 3, 9, 1, 9, 7];
+console.log(getSecondLargest(numbers)); // Output: 7
+
+==============================================
+4)swap two string without using 3rd varibale
+
+Ans) let str = "hello";
+let data = "string";
+[str, data] = [data, str];
+console.log(str)
+console.log(data)
+=========================================
+palindrome or not
+
+function isPalindrome(str) {
+  // Remove non-alphanumeric characters and convert to lowercase
+  const cleaned = str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+  // Compare the string with its reversed version
+  const reversed = cleaned.split('').reverse().join('');
+  return cleaned === reversed;
+}
+
+// Example usage
+console.log(isPalindrome("Racecar"));        // true
+console.log(isPalindrome("Hello"));          // false
+console.log(isPalindrome("A man, a plan, a canal: Panama")); // true
+===========================================
+reverse a string
+
+function reverseString(str) {
+  return str.split('').reverse().join('');
+}
+
+console.log(reverseString("hello")); // Output: "olleh"
+
+===================================
+to check prime no
+
+ffunction isPrime(num) {
+  if (num <= 1) return false; // 0 and 1 are not prime
+  if (num === 2) return true; // 2 is the only even prime number
+  if (num % 2 === 0) return false; // eliminate even numbers
+
+  // check for factors from 3 to sqrt(num)
+  const sqrt = Math.sqrt(num);
+  for (let i = 3; i <= sqrt; i += 2) {
+    if (num % i === 0) return false;
+  }
+
+  return true;
+}
+
+=================================
+
+
