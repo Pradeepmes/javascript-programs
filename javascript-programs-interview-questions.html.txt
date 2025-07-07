@@ -1,0 +1,319 @@
+1) sort array in descending order
+
+const arr = [1, -1, 10, 20, 2, 3, 8]
+	const output = arr.sort((a,b)=>{
+		return b-a
+	})
+	console.log(output)
+	
+=====================================
+
+deepEqual(obj1, obj2)
+
+that takes in two objects as arguments and returns true if they are deeply equal (have the same properties with the same values), and false otherwise. The function should handle properties with object or array values recursively.
+ 
+ Example:
+ 
+const obj1 = {
+  name: 'John',
+  age: 30,
+  address: {
+    street: '123 Main St',
+    city: 'Anytown',
+    state: 'CA'
+  },
+  hobbies: ['reading', 'traveling', 'music']
+};
+
+const obj2 = {
+  name: 'John',
+  age: 30,
+  address: {
+    street: '123 Main St',
+    city: 'Anytown',
+    state: 'CA'
+  },
+  hobbies: ['reading', 'traveling', 'music']
+
+};
+========================================================
+sorting string inside array
+
+const arr = ["bar","add"]
+	const output = arr.sort()
+	console.log(output)
+	
+====================================================
+display
+
+1 2 3 4
+1 2 3 4
+1 2 3 4
+
+let output = "";
+
+for (let row = 0; row < 4; row++) {
+  for (let num = 1; num <= 4; num++) {
+    output += num + " ";
+  }
+  output += "\n"; // Move to next line after each row
+}
+====================================================
+how to find second largest number in array
+
+function getSecondLargest(arr) {
+  const unique = [...new Set(arr)]; // remove duplicates
+  unique.sort((a, b) => b - a); // sort descending
+  return unique[1]; // second element is the second largest
+}
+
+const numbers = [5, 3, 9, 1, 9, 7];
+console.log(getSecondLargest(numbers)); // Output: 7
+
+==============================================
+4)swap two string without using 3rd varibale
+
+Ans) let str = "hello";
+let data = "string";
+[str, data] = [data, str];
+console.log(str)
+console.log(data)
+=========================================
+palindrome or not
+
+function isPalindrome(str) {
+  // Remove non-alphanumeric characters and convert to lowercase
+  const cleaned = str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+  // Compare the string with its reversed version
+  const reversed = cleaned.split('').reverse().join('');
+  return cleaned === reversed;
+}
+
+// Example usage
+console.log(isPalindrome("Racecar"));        // true
+console.log(isPalindrome("Hello"));          // false
+console.log(isPalindrome("A man, a plan, a canal: Panama")); // true
+===========================================
+reverse a string
+
+function reverseString(str) {
+  return str.split('').reverse().join('');
+}
+
+console.log(reverseString("hello")); // Output: "olleh"
+
+===================================
+to check prime no
+
+function isPrimeSimple(num) {
+  if (num <= 1) return false;
+  for (let i = 2; i < num; i++) {
+    if (num % i === 0) return false;
+  }
+  return true;
+}
+
+console.log(isPrimeSimple(7)); 
+
+=================================
+
+factorial of no
+
+function factorial(n){
+  var fact=1;
+  for(var i=2;i<=n;i++){
+    fact=fact*i;
+  }
+  return fact
+}
+factorial(6)
+=================================
+fibonacci sequence
+
+function fibonacci(n) {
+  const sequence = [];
+  for (let i = 0; i < n; i++) {
+    if (i === 0) {
+      sequence.push(0);
+    } else if (i === 1) {
+      sequence.push(1);
+    } else {
+      sequence.push(sequence[i - 1] + sequence[i - 2]);
+    }
+  }
+  return sequence;
+}
+
+// Example usage:
+console.log(fibonacci(10)); 
+// Output: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+
+
+================================
+use memo
+import React from 'react';
+
+const Button = ({ callbackClick }) => {
+  return (
+    <>
+      <button onClick={callbackClick}>Click</button>
+      {console.log('Button Re-render')}
+    </>
+  );
+};
+
+export default React.memo(Button);
+
+
+import React, { useState } from 'react';
+import { render } from 'react-dom';
+import Button from './button';
+
+const App = () => {
+  const [count, setCount] = useState(0);
+  const upDateCount = () => {
+    setCount(count + 1);
+  };
+  return (
+    <div>
+      <div>The Numner is {count}</div>
+      <br />
+      <Button callbackClick={upDateCount} />
+    </div>
+  );
+};
+
+render(<App />, document.getElementById('root'));
+
+===========================================
+
+const display =()=>{
+  try{
+    return "hello"
+  }catch(error){
+    return 'error'
+  } finally{
+    return "world"
+  }
+}
+
+display()
+//op: "world"
+
+
+==============================================
+
+reversing string with for loop
+
+function reversedString(str){
+  let reversed='';
+  for(let i=str.length-1;i>=0;i--){
+    console.log(str[i])
+    reversed += str[i];
+  }
+  return reversed;
+}
+
+reversedString("abc")
+==================================================
+var arr=[1,2,32,3,4,5,3,2]
+
+var uniq=[...new Set(arr)]
+console.log(arr,uniq);
+
+arr.sort();
+console.log(arr)
+
+arr.sort((a,b)=>{
+  return a-b
+})
+console.log(arr)
+===============================================
+bubble sort
+
+var arr=[10,20,40,30,40,30,50]
+
+for (var j=0;j<=arr.length;j++){
+  for(var i=0;i<=arr.length-1;i++){
+    if(arr[i]>arr[i+1]){
+     var temp =arr[i]
+      arr[i]=arr[i+1];
+      arr[i+1]=temp;
+    }
+  }
+}
+console.log(arr)
+=======================================
+map: for multiflying returns same no of array
+
+var arr=[10,20,40,23,30,40,30,50]
+
+const xyz=arr.map(num=> num*2);
+ 
+console.log(xyz)
+=========================================
+filter:  for checking odd numbers -returns same no of array or less no of aray
+
+var arr=[10,20,40,23,30,40,33,30,50]
+
+const xyz=arr.filter(num=> num%2);
+ 
+console.log(xyz)
+=====================================
+find : returns only first matching element
+
+var arr=[10,20,40,23,30,40,33,30,50]
+
+const xyz=arr.filter(num=> num%2);
+ 
+console.log(xyz)
+==========================================
+ removing duplicate array using for loop index
+var arr = [1, 2, 3, 4, 3, 2, 5, 6, 5, 1];
+var uniqueArr = [];
+
+for (var i = 0; i < arr.length; i++) {
+  if (uniqueArr.indexOf(arr[i]) === -1) {
+    uniqueArr.push(arr[i]);
+  }
+}
+
+console.log(uniqueArr); // 👉 Output: [1, 2, 3, 4, 5, 6]
+===============================================
+function flattenArray(arr) {
+  let result = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (Array.isArray(arr[i])) {
+      result = result.concat(flattenArray(arr[i])); // recursively flatten
+    } else {
+      result.push(arr[i]);
+    }
+  }
+
+  return result;
+}
+
+// Example usage
+console.log(flattenArray([1, [2, [3, 4], 5]])); // [1, 2, 3, 4, 5]
+=====================================================
+const flattenArray = arr => arr.flat(Infinity);
+
+console.log(flattenArray([1, [2, [3, 4], 5]])); // [1, 2, 3, 4, 5]
+================================================
+ diff ways for for,foreach
+ 
+ const fruits = ["Banana", "Orange", "Apple"];
+
+fruits.forEach(function(n) {
+  console.log(n);  // Logs one fruit at a time
+});
+
+
+for(let i=0;i<fruits.length;i++){
+  console.log(fruits[i])
+}
+
+for (let fruit of fruits) {
+   console.log(fruit);  // Logs one fruit at a time
+}
