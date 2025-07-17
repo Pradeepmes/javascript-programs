@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    .red {
+      height: 200px;
+      width: 200px;
+      background: red;
+    }
+    .green {
+      height: 200px;
+      width: 200px;
+      background: green;
+    }
+  </style>
+</head>
+<body>
+  <div id="first" class="red"></div>
+  <div id="second" class="green"></div>
+  <button onclick="toggleClass()">Change</button>
+
+  <script>
+    function toggleClass() {
+      const divOne = document.getElementById('first');
+      const divTwo = document.getElementById('second');
+
+      // Swap classes between the two divs
+      if (divOne.classList.contains('red')) {
+        divOne.classList.remove('red');
+        divOne.classList.add('green');
+        divTwo.classList.remove('green');
+        divTwo.classList.add('red');
+      } else {
+        divOne.classList.remove('green');
+        divOne.classList.add('red');
+        divTwo.classList.remove('red');
+        divTwo.classList.add('green');
+      }
+    }
+  </script>
+</body>
+</html>

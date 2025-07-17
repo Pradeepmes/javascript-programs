@@ -6,7 +6,9 @@ const arr = [1, -1, 10, 20, 2, 3, 8]
 	})
 	console.log(output)
 	
-=====================================
+	note: if u want show second largest use console.log(output[1])
+	
+========================================================
 
 ========================================================
 sorting string inside array
@@ -86,6 +88,9 @@ function isPrimeSimple(num) {
 }
 
 console.log(isPrimeSimple(7)); 
+2 is the only even prime number.
+
+Numbers like 4, 6, 8, 9, 10 are not prime because they have more than two divisors.
 
 =================================
 
@@ -230,11 +235,21 @@ function flattenArray(arr) {
 
 // Example usage
 console.log(flattenArray([1, [2, [3, 4], 5]])); // [1, 2, 3, 4, 5]
-=====================================================
+==========================================================================
+flatening array
+var arr=[1,2,3,[4,5,[6],7],8,9]
+var cc=arr.flat(2);
+console.log(cc)
+
+      using reduce method
+const nested = [[1, 2], [3, 4], [5]];
+const flat = nested.reduce((acc, arr) => acc.concat(arr), []);
+console.log(flat);  // [1, 2, 3, 4, 5]
+========================================
 const flattenArray = arr => arr.flat(Infinity);
 
 console.log(flattenArray([1, [2, [3, 4], 5]])); // [1, 2, 3, 4, 5]
-================================================
+====================================================================
  diff ways for for,foreach
  
  const fruits = ["Banana", "Orange", "Apple"];
@@ -268,11 +283,7 @@ function test(){
 
 console.log(test())  // message:'hello'
 ========================================
-flatening array
-var arr=[1,2,3,[4,5,[6],7],8,9]
-var cc=arr.flat(2);
-console.log(cc)
-========================================
+
 filter country name starts with I
 
 var arr=["india","italy","Sweden","australia","spain"]   
@@ -349,6 +360,18 @@ const result = Object.fromEntries(keys.map((key, i) => [key, values[i]]));
 
 console.log(result);
 // { name: 'John', age: 30, city: 'Delhi' }
+
+         or
+		 
+const keys = ['name', 'age', 'city'];
+const values = ['John', 30, 'Delhi'];
+
+const result = {};
+for (let i = 0; i < keys.length; i++) {
+  result[keys[i]] = values[i];
+}
+
+console.log(result);
 ==========================================
 
 function greet(gift){
@@ -416,13 +439,20 @@ points[points.length-1]
 
 points.sort((a,b)=> b-a)
 points[0];
+
+  using reduce method
+const scores = [45, 78, 88, 95, 32];
+
+const max = scores.reduce((a, b) => a > b ? a : b);
+console.log(max);  // 95
+
 ======================================
 
 const person = [
   {name:"Pradeep", age:34,place:"Bangalore"},
    {name:"raj", age:30,place:"Delhi"},
    {name:"vikas", age:34,place:"noida"},
-    {name:"rahul", age:34,place:"mumbai"},
+   {name:"rahul", age:34,place:"mumbai"},
    {name:"mahendra", age:40,place:"Bangalore"},
   {name:"Akash", age:40,place:"Bangalore"},
 ];
@@ -450,12 +480,133 @@ function repeatstring(str,times){
   return str.repeat(3)
 }
 console.log(repeatstring("abc",3));
+=================================================
+console.log('Start');
+
+setTimeout(() => {
+  console.log('Timeout');
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log('Promise');
+});
+
+console.log('End');
+=============================================
+const city=["London","India","Paris","Australia","Germany"]
+
+console.log(city.includes("London",0))  //true
+console.log(city.includes("India",1)) // true
+console.log(city.includes("Australia",1)) // false
+
+=============================================
+
+const fruits = ['apple', 'banana', 'apple', 'orange', 'banana', 'apple'];
+
+const count = fruits.reduce((acc, fruit) => {
+  acc[fruit] = (acc[fruit] || 0) + 1;
+  return acc;
+}, {});
+
+console.log(count);
+// { apple: 3, banana: 2, orange: 1 }
+=========================================
+
+const nums = [10, 20, 10, 30, 20, 10];
+
+const count=nums.reduce((acc,num)=>{
+  acc[num]= (acc[num] || 0)+1;
+  return acc
+},{})
+console.log(count)
+
+for(const key in count){
+  const times = count[key] === 1 ? 'time' : 'times';
+  console.log(`${key} occurs ${count[key]} ${times}`);
+}
 
 
 
 
+javascript methods
+https://www.linkedin.com/feed/update/urn:li:groupPost:8571393-7347823330550280192?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
 
+https://www.linkedin.com/posts/rahul-choudhary-py_javascript-ugcPost-7348594216983265280-7-eZ?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
 
+===================================
+const person={
+  name:"Pradeep",
+  age: 29
+}
+console.log(Object.keys(person)) // returns only keys
+console.log(Object.values(person)) // returns only values
+console.log(Object.entries(person))// key- values pair
+console.log(Object.freeze(person)) // we cannot change or modify after this
+
+console.log(person.hasOwnProperty("name")); returns true 
+==================================================
+/*array: [1,2,3,4,5,6]
+input: 2, output[[1,2],[3,4],[5,6]], 
+input: 5, output[[1,2,3,4,5],[6]]*/
+
+function chunkArray(array, size) {
+  const result = [];
+  for (let i = 0; i < array.length; i += size) {
+    result.push(array.slice(i, i + size));
+  }
+  return result;
+}
+
+// Example usage:
+const arr = [1, 2, 3, 4, 5, 6];
+
+console.log(chunkArray(arr, 2)); // [[1,2], [3,4], [5,6]]
+console.log(chunkArray(arr, 5)); // [[1,2,3,4,5], [6]]
+==================================================
+/*output : {
+'25':[{ name: 'Alice', age: 25 },{ name: 'Charlie', age: 25 }]
+'30':[{ name: 'Bob', age: 30 }]
+}*/
+const users = [
+    { name: 'Alice', age: 25 },
+    { name: 'Bob', age: 30 },
+    { name: 'Charlie', age: 25 }
+];
+
+const groupedByAge = {};
+
+users.forEach(user => {
+    const key = user.age;
+    groupedByAge[key] = groupedByAge[key] || [];
+    groupedByAge[key].push(user);
+});
+
+console.log(groupedByAge);
+=================================================
+function foo(){
+  console.log(1)
+}
+const cn=function foo(){
+  console.log(2)
+}
+foo()
+//1 
+==================================================
+// 2,3,5,7,11,13
+function checkPrime(num){
+   for(var i=2;i<num;i++){
+       if(num%i==0) return false
+      
+   }
+   return true
+}
+
+for (var j=1;j<=15;j++){
+    if(checkPrime(j)){
+        console.log(j)
+    }
+}
+===================================================
 
 
 

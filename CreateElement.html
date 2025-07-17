@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Divs Above Button</title>
+  <style>
+    .red {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      margin-bottom: 10px;
+    }
+
+    .green {
+      width: 100px;
+      height: 100px;
+      background-color: green;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="createBtn">Click Me</button>
+
+  <script>
+    document.getElementById('createBtn').addEventListener('click', function () {
+      const button = document.getElementById('createBtn');
+
+      const redDiv = document.createElement('div');
+      redDiv.className = 'red';
+
+      const greenDiv = document.createElement('div');
+      greenDiv.className = 'green';
+
+      // Insert above the button in the DOM
+      document.body.insertBefore(greenDiv, button);
+      document.body.insertBefore(redDiv, greenDiv);
+    });
+  </script>
+
+ <!-- <script>
+    document.getElementById('createBtn').addEventListener('click', () => {
+      const button = document.getElementById('createBtn');
+
+      const redDiv = document.createElement('div');
+      redDiv.className = 'red';
+
+      const greenDiv = document.createElement('div');
+      greenDiv.className = 'green';
+
+      button.before(redDiv, greenDiv); // simpler than insertBefore
+    });
+  </script>-->
+
+</body>
+</html>
