@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+<img id="img"src="xyz" alt=""/>
+<h1 id="test">This is a Heading</h1>
+<p>This is a paragraph.</p>
+
+<ul id="myList"></ul>
+
+</ul>
+<button id="add">add</button>
+</body>
+<script>
+    const test=document.getElementById('test');
+
+   // test.innerHTML="<p>This is a paragraph chnages</p>"
+   // test.textContent='text content only'
+
+   test.style.background="red"
+   document.getElementById('img').setAttribute("src","image.jpeg")
+   const newElement = document.createElement("span")
+   newElement.textContent="hi new span";
+   newElement.className="xyz";
+
+   newElement.classList.add("pradeep")
+   if( newElement.classList.contains("xyz")){
+     test.style.background="green"
+
+   }
+
+   test.appendChild(newElement)
+
+   ///new
+   const btn= document.getElementById('add')
+   btn.addEventListener("click",function(){
+    const listelement = document.createElement("li")
+
+   listelement.textContent="first child"
+
+   document.getElementById('myList').appendChild(listelement)
+
+   })
+   
+
+
+</script>
+</html>
+
+

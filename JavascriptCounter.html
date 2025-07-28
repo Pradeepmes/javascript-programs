@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Form</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  <style>
+  
+  </style>
+</head>
+<body>
+
+
+    <div id="count">0</div>
+    <button id="inc">inc</button>
+    <button id="dec">dec</button>
+
+    <script>
+        let count=0;
+        const div=document.getElementById("count")
+        const inc=document.getElementById("inc")
+        const dec=document.getElementById("dec")
+
+        inc.addEventListener("click",function(){
+            count++;
+            div.innerHTML=count;
+        })
+         dec.addEventListener("click",function(){
+            count--;
+            div.innerHTML=count;
+        })
+    </script>
+</body>
+</html>

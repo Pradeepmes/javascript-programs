@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Event Capturing</title>
+  <style>
+    .parent {
+      height: 200px;
+      width: 200px;
+      border: 1px solid gray;
+      padding: 10px;
+    }
+    .child {
+      height: 100px;
+      width: 100px;
+      border: 1px solid gray;
+      padding: 10px;
+    }
+    .grandChild {
+      height: 20px;
+      width: 20px;
+      border: 1px solid gray;
+    }
+  </style>
+</head>
+<body>
+  <div class="parent" id="parent">
+    Parent
+    <div class="child" id="child">
+      Child
+      <div class="grandChild" id="grandChild">
+        GrandChild
+      </div>
+    </div>
+  </div>
+
+  <ul id="menu">
+  <li>Home</li>
+  <li>About</li>
+  <li>Contact</li>
+</ul>
+<script>
+  const menu = document.getElementById('menu');
+
+  menu.addEventListener('click', function (e) {
+    if (e.target.tagName == 'LI') {
+      alert('You clicked on ' + e.target.textContent);
+    }
+  });
+</script>
+
+  <script>
+    const parent = document.getElementById('parent');
+    const child = document.getElementById('child');
+    const grandchild = document.getElementById('grandChild');
+
+   /* parent.addEventListener('click', function(e) {
+      console.log('Parent - Capturing');
+    }, true); // capturing
+
+    child.addEventListener('click', function(e) {
+      console.log('Child - Capturing');
+    }, true); // capturing
+
+    grandchild.addEventListener('click', function(e) {
+      console.log('GrandChild - Capturing');
+    }, true); // capturing */
+    console.log("---------------------")
+    grandchild.addEventListener('click', function(e) {
+      console.log('GrandChild - Bubbling');
+    }); // bubbling
+
+    child.addEventListener('click', function(e) {
+      console.log('Child - Bubbling');
+    }); // bubbling
+
+    parent.addEventListener('click', function(e) {
+      console.log('Parent - Bubbling');
+    }); // bubbling 
+  </script>
+</body>
+</html>

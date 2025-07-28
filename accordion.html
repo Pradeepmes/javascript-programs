@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Accessible Accordion</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 10px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .accordion-header {
+      background-color: #f2f2f2;
+      border: none;
+      padding: 15px;
+      font-size: 16px;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      outline: none;
+      transition: background-color 0.2s ease;
+    }
+
+    .accordion-header:hover {
+      background-color: #ddd;
+    }
+
+    .accordion-content {
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-top: none;
+      background-color: #fafafa;
+    }
+
+    .accordion-item + .accordion-item {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="accordion">
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="true">
+        What is JavaScript?
+      </button>
+      <div class="accordion-content">
+        JavaScript is a programming language that enables interactive web pages. It runs in the browser and powers things like sliders, modals, and dynamic content.
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false">
+        What is the DOM?
+      </button>
+      <div class="accordion-content" hidden>
+        DOM stands for Document Object Model. It represents your HTML page as a tree of objects that JavaScript can manipulate.
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false">
+        Why use semantic HTML?
+      </button>
+      <div class="accordion-content" hidden>
+        Semantic HTML tags like &lt;nav&gt;, &lt;main&gt;, &lt;article&gt;, etc., help both browsers and assistive technologies understand the structure and purpose of content.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const headers = document.querySelectorAll('.accordion-header');
+
+    headers.forEach(header => {
+      header.addEventListener('click', () => {
+        const isExpanded = header.getAttribute('aria-expanded') === 'true';
+
+        // Collapse all
+        headers.forEach(h => {
+          h.setAttribute('aria-expanded', 'false');
+          h.nextElementSibling.hidden = true;
+        });
+
+        // Expand clicked one if it wasn't already
+        if (!isExpanded) {
+          header.setAttribute('aria-expanded', 'true');
+          header.nextElementSibling.hidden = false;
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

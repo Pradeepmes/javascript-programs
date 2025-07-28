@@ -155,18 +155,6 @@ function reversedString(str){
 
 console.log(reversedString("abc"));
 ==================================================
-var arr=[1,2,32,3,4,5,3,2]
-
-var uniq=[...new Set(arr)]
-console.log(arr,uniq);
-
-arr.sort();
-console.log(arr)
-
-arr.sort((a,b)=>{
-  return a-b
-})
-console.log(arr)
 ===============================================
 bubble sort
 
@@ -245,7 +233,7 @@ console.log(cc)
 const nested = [[1, 2], [3, 4], [5]];
 const flat = nested.reduce((acc, arr) => acc.concat(arr), []);
 console.log(flat);  // [1, 2, 3, 4, 5]
-========================================
+======================================================================
 const flattenArray = arr => arr.flat(Infinity);
 
 console.log(flattenArray([1, [2, [3, 4], 5]])); // [1, 2, 3, 4, 5]
@@ -277,7 +265,8 @@ output of program
 
 function test(){
   return {
-    message:'hello'
+    message:'hello',
+	value:'20'
   }
 }
 
@@ -303,6 +292,7 @@ for (let i = 0; i < n; i++) {
 }
 console.log(arr); // [4, 5, 1, 2, 3]
 
+//arr.push(arr.shift());
 ==========================================
 Find Duplicates in an Array
 
@@ -318,7 +308,7 @@ const users = [
   { name: 'Alice', age: 30 },
   { name: 'Bob', age: 22 },
   { name: 'Charlie', age: 27 },
-   { name: 'Abhi', age: 27 },
+  { name: 'Abhi', age: 27 },
 ];
 
 const filtered=users.filter(user=> user.age > 25).sort((a,b)=>{
@@ -329,7 +319,7 @@ console.log(filtered)
 
 o/p [ { name: 'Abhi', age: 27 }, { name: 'Alice', age: 30 }, { name: 'Charlie', age: 27 } ]
 
-==============================================
+=================================================
 
 Given an array of objects, count how many users are from each city.
 
@@ -349,6 +339,15 @@ for (const user of users) {
 
 console.log(cityCount);
 // { Delhi: 2, Mumbai: 2, Bangalore: 1 }
+
+or reduce method
+
+const cityCounts = users.reduce((acc, user) => {
+  acc[user.city] = (acc[user.city] || 0) + 1;
+  return acc;
+}, {});
+
+console.log(cityCounts);
 ===================================================
 
 Merge keys and values from two arrays.
@@ -512,13 +511,13 @@ console.log(count);
 // { apple: 3, banana: 2, orange: 1 }
 =========================================
 
-const nums = [10, 20, 10, 30, 20, 10];
+	const nums = [10, 20, 10, 30, 20, 10];
 
-const count=nums.reduce((acc,num)=>{
-  acc[num]= (acc[num] || 0)+1;
-  return acc
-},{})
-console.log(count)
+	const count=nums.reduce((acc,num)=>{
+	  acc[num]= (acc[num] || 0)+1;
+	  return acc
+	},{})
+	console.log(count)
 
 for(const key in count){
   const times = count[key] === 1 ? 'time' : 'times';
@@ -529,10 +528,18 @@ for(const key in count){
 
 
 javascript methods
+
 https://www.linkedin.com/feed/update/urn:li:groupPost:8571393-7347823330550280192?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
 
 https://www.linkedin.com/posts/rahul-choudhary-py_javascript-ugcPost-7348594216983265280-7-eZ?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
 
+https://www.linkedin.com/posts/amankumar2k24_javascript-is-asynchronous-or-synchronous-activity-7349995998431072258-rMdW?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
+
+https://www.linkedin.com/posts/vipul-kumar-kewat-1b5a48277_java-script-notes-activity-7350043204882169856-4vN5?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
+
+https://www.linkedin.com/posts/dharamgfx_js-activity-7353076873653899267-0pQC?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
+
+https://www.linkedin.com/posts/arunsharma021_javascript-concept-activity-7355149204345753600-ZZuk?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
 ===================================
 const person={
   name:"Pradeep",
@@ -562,7 +569,8 @@ const arr = [1, 2, 3, 4, 5, 6];
 
 console.log(chunkArray(arr, 2)); // [[1,2], [3,4], [5,6]]
 console.log(chunkArray(arr, 5)); // [[1,2,3,4,5], [6]]
-==================================================
+========================================================
+========================================================
 /*output : {
 '25':[{ name: 'Alice', age: 25 },{ name: 'Charlie', age: 25 }]
 '30':[{ name: 'Bob', age: 30 }]
@@ -582,6 +590,8 @@ users.forEach(user => {
 });
 
 console.log(groupedByAge);
+         and 
+		 
 =================================================
 function foo(){
   console.log(1)
@@ -607,10 +617,246 @@ for (var j=1;j<=15;j++){
     }
 }
 ===================================================
+Find the Difference Between Two Arrays
+
+function difference(arr1,arr2){
+  const set2=new Set(arr2);
+  return arr1.filter(item=> !set2.has(item))
+}
+
+difference([1,2,3,4],[2,4])  // 1,3
+==============================================
+const str = "Hello, world!";
+console.log(str.includes("world")); // true
+console.log(str.includes("test"));  // false
+
+=================================================
+const str = "Hello, world!";
+console.log(str.indexOf("world") !== -1); // true
+console.log(str.indexOf("test") !== -1);  // false
+=================================================
+
+const email = "test@example.com";
+const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+console.log(pattern.test(email)); // true
+==================================================
+
+function squareroot(num){
+  return Math.sqrt(num)
+}
+console.log(squareroot(25))
+
+//op 5
+===================================================
+function max(...numbers) {
+  return Math.max(...numbers);
+}
+
+console.log(max(4, 8, 5));  // Output: 8
+==================================================
+function printVowels(str) {
+  const vowels = ['a', 'e', 'i', 'o', 'u'];
+  const result = [];
+
+  for (let char of str.toLowerCase()) {
+    if (vowels.includes(char)) {
+      result.push(char);
+    }
+  }
+
+  console.log(result.join(', '));
+}
+
+// Example usage:
+printVowels("hellow world"); // Output: e, o, o
+     0r
+	 
+function printVowels(str) {
+  const matches = str.match(/[aeiou]/gi); // 'g' = global, 'i' = case-insensitive
+
+  if (matches) {
+    console.log(matches.join(', '));
+  } else {
+    console.log("No vowels found.");
+  }
+}
+
+// Example usage:
+printVowels("hellow world"); // Output: e, o, o
+======================================================
+console.log('Start');
+
+setTimeout(() => {
+  console.log('Timeout');
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log('Promise');
+});
+
+async function asyncFunction() {
+  console.log('Async Start');
+  await null;
+  console.log('Async End');
+}
+
+asyncFunction();
+
+console.log('End');
+
+o/p: 
+
+Start
+Async Start
+End
+Promise
+Async End
+Timeout
+============================================================
+
+let arr = [1, 2, 3, 3, 5, 6, 8, 9, 20];
+
+// Remove duplicates
+let uniqueArr = [...new Set(arr)];
+
+// Find the max
+let max = Math.max(...uniqueArr);
+
+// Remove the max from the array
+uniqueArr = uniqueArr.filter(num => num !== max);
+
+// Find the second highest
+let secondMax = Math.max(...uniqueArr);
+
+console.log(secondMax); // Output: 9
+============================================
+const obj = { name: "Pradeep", age: 27, place: "udupi" };
+const result = [obj];
+
+console.log(result);
+// Output: [{ name: "Pradeep", age: 27, place: "udupi" }]
+===============================================
+
+     splice method in array
+	 
+	 array.splice(start, deleteCount, item1, item2, ...)
+	 
+	 let fruits = ["Apple", "Banana", "Mango", "Orange"];
+fruits.splice(1, 2); // Removes 2 items starting from index 1
+console.log(fruits); // Output: ["Apple", "Orange"]
 
 
+let colors = ["Red", "Blue"];
+colors.splice(1, 0, "Green", "Yellow"); // Insert at index 1 without deleting
+console.log(colors); // Output: ["Red", "Green", "Yellow", "Blue"]
 
-  
+
+let numbers = [1, 2, 3, 4];
+numbers.splice(1, 2, 9, 8); // Removes 2 items at index 1 and adds 9, 8
+console.log(numbers); // Output: [1, 9, 8, 4]
+
+     note: modifys orriginal array
+	 
+===============================================
  
+    slice method in array
+	
+	array.slice(start, end)
+start: The index to begin extraction (inclusive).
+
+end: The index to stop extraction (exclusive). Optional.
+	
+	let colors = ["Red", "Green", "Blue", "Yellow"];
+let slicedColors = colors.slice(1, 3); // from index 1 to 2 (not 3)
+console.log(slicedColors); // Output: ["Green", "Blue"]
+
+let numbers = [10, 20, 30, 40, 50];
+let result = numbers.slice(2);
+console.log(result); // Output: [30, 40, 50]
 
 
+
+let fruits = ["Apple", "Banana", "Mango", "Orange"];
+let lastTwo = fruits.slice(-2); // Starts 2 from the end
+console.log(lastTwo); // Output: ["Mango", "Orange"]
+	 
+	 note: this will not modify original array
+================================================
+
+const arr1=[1,2,3,4,5,6]
+
+const arr2=[7,8,9,10];
+const merged=arr1.concat(arr2)
+console.log(merged)  //  [1,2,3,4,5,6,7,8,9,10]
+
+  or
+  
+const arr1=[1,2,3,4,5,6]
+
+const arr2=[7,8,9,10];
+const merged=[...arr1,...arr2]
+console.log(merged)  //  [1,2,3,4,5,6,7,8,9,10]
+
+
+const arr1=[1,2,3,4,5,6]
+
+const arr2=[7,8,9,10];
+const merged=arr1 + arr2
+console.log(merged)  // [1,2,3,4,5,67,8,9,10]  // last elements are merged in each array 67
+
+
+const arr1=[1,2,3,4,5,6]
+
+const arr2=[7,8,9,10];
+const merged=[arr1,arr2]
+console.log(merged)  // [ [ 1, 2, 3, 4, 5, 6 ], [ 7, 8, 9, 10 ] ] will create two sepaate array
+============================================================
+
+
+function abc(arr){
+let total=0;
+   for(var i=0; i<arr.length;i++){
+       total += arr[i];
+   }
+  return total;
+}
+
+const arr=[1,2,3,4,5]
+abc(arr) // sum 15
+
+==================================
+function memoadd(){
+let cache={}
+ return function(n){
+ 
+     if (n in cache){
+	   console.log("from cache");
+	   return cache[n];
+	 } else {
+	   console.log("calculating again");
+	   cache[n]= n+10;
+	   return cache[n];
+	 }
+ }
+}
+
+const add=memoadd();
+add(5);
+====================================
+const arr=[1,2,3,4,5];
+let result=0;
+for (let i=0;i<arr.length;i++){
+
+   result += arr[i];
+}
+console.log(result);   sum 15
+====================================
+currying
+
+function add(a){
+    return function(b){
+        return a + b;
+    }
+}
+console.log(add(5)(5))

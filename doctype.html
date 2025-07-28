@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Web Page</title>
+  <style>
+    .parent{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        height: 100vh; 
+         flex-wrap: wrap; /* Wrap to next line if space is tight */ 
+    }
+    .child{
+        border: 1px solid gray;
+    height: 100px;
+    width: 100%;
+    max-width: 200px;
+    flex: 1 1 150px; /* Allow flex-grow and shrink */
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: center;
+    }
+  </style>
+
+</head>
+<body>
+  
+  <div class="parent">
+     
+    <div class="child">
+        dffs
+
+    </div>
+     <div class="child">
+        dfcdsf
+
+    </div>
+     <div class="child">
+        ddsfsd
+
+    </div>
+
+  </div>
+
+</body>
+</html>

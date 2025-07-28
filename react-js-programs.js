@@ -525,3 +525,246 @@ function Allinone() {
 }
 
 export default Allinone;
+============================================================
+====================toggle button====================
+
+import React from 'react'
+import { useState } from 'react'
+
+const Togglebutton = () => {
+
+    const [initial,setInitial] = useState("edit")
+
+    const handler=()=>{
+        setInitial(prev=> prev==='save'? "edit":"save")   
+    }
+  return (
+    <div>
+        <h1>Togglebutton</h1>
+
+        <button onClick={handler}>{initial}</button>
+      
+    </div>
+  )
+}
+
+export default Togglebutton
+==========================================================
+
+custom hooks
+
+// useWindowSize.js
+import { useState, useEffect } from "react";
+
+function useWindowsize() {
+  const [size, setSize] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setSize(window.innerWidth);
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return size;
+}
+    
+	and import in any component file
+export default useWindowsize;
+
+
+import React from 'react'
+import useWindowsize from './useWindowsize'
+const Samplewindow = () => {
+  const widthofscreen = useWindowsize();
+  return (
+    <div>
+      Screen size: {widthofscreen}
+    </div>
+  );
+}
+
+export default Samplewindow
+
+============================================================
+debouncing with API search in client side
+
+import React from "react";
+import { useState, useEffect } from "react";
+
+const DebounceWithAPISearch = () => {
+  const [user, setUser] = useState([]);
+  const [input, setInput] = useState();
+  const [debouncedTerm,setDebouncedTerm]=useState()
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then((data) => setUser(data));
+
+    // setUser(user);
+    console.log(user);
+  }, []);
+
+  useEffect(()=>{
+    setTimeout(() => {
+      setDebouncedTerm(input);
+    }, 2000);
+  },[input])
+
+  const filteredUser=user.filter((item)=>{
+    return item.name.includes(debouncedTerm)
+  })
+
+  return (
+    <div>
+      <h1>Debounce with Rest API</h1>
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+      {filteredUser.map((item) => {
+        return (
+          <span><br/>
+            {item.name}
+            <br />
+          </span>
+        );
+      })}
+    </div>
+  );
+};
+
+export default DebounceWithAPISearch;
+===============================================
+Debouncing with serach API with server side
+
+import React from "react";
+import { useState, useEffect } from "react";
+
+const DebounceWithAPISearch = () => {
+  const [user, setUser] = useState([]);
+  const [input, setInput] = useState("");
+  const [debouncedTerm, setDebouncedTerm] = useState();
+
+  useEffect(() => {
+    const fetchFilteredPosts = async () => {
+      fetch(`https://jsonplaceholder.typicode.com/users?q=${debouncedTerm}`)
+        .then((response) => response.json())
+        .then((data) => setUser(data));
+    };
+
+    if (debouncedTerm) {
+      fetchFilteredPosts();
+    }
+  }, [debouncedTerm]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setDebouncedTerm(input);
+    }, 2000);
+  }, [input]);
+
+  return (
+    <div>
+      <h1>Debounce with Rest API</h1>
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+      {user.map((item) => {
+        return (
+          <span>
+            <br />
+            {item.name}
+            <br />
+          </span>
+        );
+      })}
+    </div>
+  );
+};
+
+export default DebounceWithAPISearch;
+===============================================================
+todolist
+
+import React, { useEffect, useState } from "react";
+
+function Todolistone() {
+  const [todolist, setTodolist] = useState([]);
+  const [input, setInput] = useState("");
+
+  const clickHandler = () => {
+    const newTask = {
+      taskname: input,
+      status: "pending",
+    };
+
+    setTodolist([...todolist, newTask]);
+    setInput("");
+  };
+
+  useEffect(() => {
+    const storedTodos = localStorage.getItem("TodoListitem");
+    if (storedTodos) {
+      setTodolist(JSON.parse(storedTodos));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("TodoListitem", JSON.stringify(todolist));
+  });
+
+  const toggleStatus = (index) => {
+    const updatedList = [...todolist];
+    updatedList[index].status =
+      updatedList[index].status === "pending" ? "completed" : "pending";
+    setTodolist(updatedList);
+  };
+
+  return (
+    <div>
+      <h1>Todo List Task</h1>
+
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+      <button onClick={clickHandler}>Add</button>
+
+      <ul>
+        {todolist.map((item, key) => (
+          <li key={key}>
+            <input
+              type="checkbox"
+              checked={item.status === "completed"}
+              onChange={() => toggleStatus(key)}
+            />
+            <span
+              style={{
+                textDecoration:
+                  item.status === "completed" ? "line-through" : "none",
+              }}
+            >
+              {item.taskname}
+            </span>
+            ({item.status})
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default Todolistone;
+
