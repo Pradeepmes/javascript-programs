@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+   
+  </style>
+</head>
+<body>
+
+    <select id="country">
+  <option value="">Select Country</option>
+  <option value="india">India</option>
+  <option value="usa">USA</option>
+</select>
+
+<select id="state">
+  <option value="">Select State</option>
+</select>
+
+<script>
+  const states = {
+    india: ["Delhi", "Gujarat", "Punjab"],
+    usa: ["California", "Texas", "Florida"]
+  };
+
+  document.getElementById("country").addEventListener("change", function () {
+    const stateDropdown = document.getElementById("state");
+    stateDropdown.innerHTML = "<option value=''>Select State</option>";
+
+    if (states[this.value]) {
+      states[this.value].forEach(state => {
+        const opt = document.createElement("option");
+        opt.value = state.toLowerCase();
+        opt.textContent = state;
+        stateDropdown.appendChild(opt);
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

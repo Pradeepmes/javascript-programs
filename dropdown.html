@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+   
+  </style>
+</head>
+<body>
+
+    <div>
+        <select id="country">
+            <option value="india">india</option>
+            <option value="australia">Australia</option>
+            <option value="">US</option>
+            <option value="US">Russia</option>
+            <option value="japan">japan</option>
+        </select>
+    </div>
+    <div class="countries india" style="display: none;">content of india</div>
+    <div class="countries australia" style="display: none;">content of australia</div>
+
+    
+
+    <script>
+        const dropdown = document.getElementById('country');
+
+    dropdown.addEventListener('change', function () {
+        alert(dropdown.value);
+            document.querySelectorAll('.countries').forEach(function(el) {
+                 el.style.display = "none";
+            });
+
+        if(dropdown.value=="india"){
+            document.querySelector('.india').style.display="block"
+        }
+        if(dropdown.value=="australia"){
+            document.querySelector('.australia').style.display="block"
+        }
+    });
+    </script>
+</body>
+</html>

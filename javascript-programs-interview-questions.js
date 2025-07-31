@@ -524,23 +524,7 @@ for(const key in count){
   console.log(`${key} occurs ${count[key]} ${times}`);
 }
 
-
-
-
-javascript methods
-
-https://www.linkedin.com/feed/update/urn:li:groupPost:8571393-7347823330550280192?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
-
-https://www.linkedin.com/posts/rahul-choudhary-py_javascript-ugcPost-7348594216983265280-7-eZ?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
-
-https://www.linkedin.com/posts/amankumar2k24_javascript-is-asynchronous-or-synchronous-activity-7349995998431072258-rMdW?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
-
-https://www.linkedin.com/posts/vipul-kumar-kewat-1b5a48277_java-script-notes-activity-7350043204882169856-4vN5?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
-
-https://www.linkedin.com/posts/dharamgfx_js-activity-7353076873653899267-0pQC?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
-
-https://www.linkedin.com/posts/arunsharma021_javascript-concept-activity-7355149204345753600-ZZuk?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
-===================================
+=======================================================
 const person={
   name:"Pradeep",
   age: 29
@@ -860,3 +844,72 @@ function add(a){
     }
 }
 console.log(add(5)(5))
+====================================
+
+function outer(){
+    let count=0;
+    
+    return function inner(){
+        count++
+        return count
+    }
+    
+}
+
+const counter1=outer();
+console.log(counter1()) //1
+console.log(counter1())//2
+
+const counter2=outer();
+console.log(counter2())//1
+console.log(counter2())//2
+================================
+
+const obj={
+    name:"pradeep",
+    greet:function(){
+        console.log(`hell0 ,${this.name}`)
+    }
+}
+
+obj.greet()
+
+const newgreet=obj.greet;
+newgreet()
+
+hell0 ,pradeep
+hell0 ,undefined
+
+    solution
+	
+	we can use bind method 
+	const newgreet = obj.greet.bind(obj);
+newgreet(); // hell0 ,pradeep
+
+=============================
+let f="8";
+let a=1;
+console.log((+f)+a+1)  //10
+==================================
+
+javascript methods
+
+https://www.linkedin.com/feed/update/urn:li:groupPost:8571393-7347823330550280192?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
+
+https://www.linkedin.com/posts/rahul-choudhary-py_javascript-ugcPost-7348594216983265280-7-eZ?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
+
+https://www.linkedin.com/posts/amankumar2k24_javascript-is-asynchronous-or-synchronous-activity-7349995998431072258-rMdW?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
+
+https://www.linkedin.com/posts/vipul-kumar-kewat-1b5a48277_java-script-notes-activity-7350043204882169856-4vN5?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
+
+https://www.linkedin.com/posts/dharamgfx_js-activity-7353076873653899267-0pQC?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
+
+https://www.linkedin.com/posts/arunsharma021_javascript-concept-activity-7355149204345753600-ZZuk?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
+
+https://www.linkedin.com/posts/vinothkumar-j-dev_master-and-crack-the-interview-activity-7355105111083307008-Pwdb?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
+
+
+https://www.linkedin.com/posts/theabdul-rehman345_new-react-hooks-19-activity-7355816863504736260-o2ZQ?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
+
+https://www.linkedin.com/feed/update/urn:li:groupPost:10487081-7353048821502787584?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
+===================================

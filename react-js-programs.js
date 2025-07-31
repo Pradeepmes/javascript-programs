@@ -726,8 +726,7 @@ function Todolistone() {
 
   const toggleStatus = (index) => {
     const updatedList = [...todolist];
-    updatedList[index].status =
-      updatedList[index].status === "pending" ? "completed" : "pending";
+    updatedList[index].status = updatedList[index].status === "pending" ? "completed" : "pending";
     setTodolist(updatedList);
   };
 
@@ -768,3 +767,270 @@ function Todolistone() {
 
 export default Todolistone;
 
+=============================================================
+
+async function fetchUsers() {
+    try {
+        let res = await fetch("https://jsonplaceholder.typicode.com/users");
+        let data = await res.json();
+        console.log(data);
+    } catch (error) {
+        console.error("Error fetching users:", error);
+    }
+}
+
+fetchUsers();
+=============================================================
+React.memo
+
+parent.js 
+
+import React from "react";
+import { useState } from "react";
+import Reactmemochild from "./Reactmemochild";
+
+function Reactmemoparent() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <h1>Parent comp</h1>
+      <div>
+        <Reactmemochild name="pradeep" />
+        <div>
+          {count}
+
+          <button onClick={() => setCount(count + 1)}>click</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Reactmemoparent;
+
+child.js
+
+import React from "react";
+
+const Reactmemochild = React.memo(({ name }) => {
+  console.log("Rendering Child");
+
+  return (
+    <div>
+      <h1>Child Component: {name}</h1>
+    </div>
+  );
+});
+
+export default Reactmemochild;
+
+app.js
+
+   <Reactmemoparent/>
+
+
+=============================================================
+const obj={
+    name:"pradeep",
+    getname:function(){
+        return this.name;
+    },
+    getname1:()=>{this.name},
+    getname2:()=>{
+        return this.name
+    }
+}
+const that = obj;
+console.log(obj.getname());
+console.log(obj.getname1())
+console.log(obj.getname2())
+
+//op 
+pradeep    //In a regular function, this refers to the object that invokes the function.
+undefined  // Arrow functions do not have their own this. They inherit this from their lexical scope (i.e., where they are defined).
+undefined   //
+   
+    to make work inside arrow function chnage like this 
+
+const obj={
+    name:"pradeep",
+    getname:function(){
+        return this.name;
+    },
+    getname1:()=>that.name,
+    getname2:()=>{
+        return that.name
+    }
+}
+const that = obj;
+console.log(obj.getname());
+console.log(obj.getname1())
+console.log(obj.getname2())
+
+o/p : 
+
+pradeep
+pradeep
+pradeep
+
+note: Here, that holds a reference to obj, so that.name works inside the arrow function.
+==========================================================================================
+
+                 accordion
+				 
+import React from "react";
+import { useState } from "react";
+
+const data = [
+  {
+    title: "Accordion 1",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+  },
+  {
+    title: "Accordion 2",
+    content: "Content for accordion 2 goes here.",
+  },
+  {
+    title: "Accordion Actions",
+    content: "This could be actions like Save, Cancel, etc.",
+  },
+];
+
+const Accordion = () => {
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const toggle = (index) => {
+    
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+    <div className="accordion-container">
+      {data.map((item, index) => (
+        <div key={index} className="accordion-item">
+          <div className="accordion-header" onClick={() => toggle(index)}>
+            <h3>{item.title}</h3>
+            <span>{openIndex === index ? "close" :"open"}</span>
+          </div>
+          {openIndex === index && (
+            <div className="accordion-content">
+              <p>{item.content}</p>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default Accordion;
+============================================
+
+debounce in javascript
+
+<input type="text" id="search" placeholder="Search..." />
+
+js.
+
+function handleInput(event) {
+  console.log("Searching for:", event.target.value);
+}
+
+const debouncedInput = debounce(handleInput, 500);
+
+document.getElementById("search").addEventListener("input", debouncedInput);
+
+
+function debounce(func, delay) {
+  let timerId;
+
+  return function (...args) {
+    clearTimeout(timerId);
+    timerId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}
+
+============================================
+API throttle
+
+<button id="loadDataBtn">Fetch Data</button>
+
+function fetchData() {
+  console.log("API Call at:", new Date().toLocaleTimeString());
+  // Simulate API call
+  // fetch('/api/data')...
+}
+
+const throttledFetch = throttle(fetchData, 2000); // Only once every 2 seconds
+document.getElementById("loadDataBtn").addEventListener("click", throttledFetch);
+
+
+function throttle(func, limit) {
+  let inThrottle;
+  return function (...args) {
+    if (!inThrottle) {
+      func.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  };
+}
+
+=================================================
+React-router
+
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+
+
+app.js
+
+<Router>
+         
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Homepage />} />
+          <Route path="/electronics" element={<Electronics />} />
+           <Route path="/addmobile" element={<AddMobile />} />
+
+        </Routes>
+        
+</Router>
+
+header.js
+
+import { Link } from "react-router-dom";
+
+<Link to="/home">
+        <div class="item">
+          <img src={img} alt="Image 2" />
+          <p>Home</p>
+        </div>
+</Link>
+<Link to="/electronics">
+          <div class="item">
+            <img src={img} alt="Image 2" />
+            <p>Electronics</p>
+          </div>
+</Link>
+<Link to="/addmobile">
+        <div class="item">
+          <img src={img} alt="Image 2" />
+          <p>Add New mobile</p>
+        </div>
+</Link>
+
+loginpage.js
+
+import { useNavigate } from 'react-router-dom';
+
+if(){
+	navigate('/home');
+}

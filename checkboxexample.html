@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+
+</style>
+
+</head>
+<body>
+   
+  <input type="checkbox" value="sports" name="hobbies" onchange="getCheckboxValue()"/>
+   <div id="result"></div>
+  <script>
+    
+    function getCheckboxValue(){
+        const checkboxValue= document.querySelector('input[name="hobbies"]:checked').value;
+             document.getElementById('result').innerText= checkboxValue;
+    }
+  </script>
+  <hr/>
+    <h3>Select Hobbies:</h3>
+    <input type="checkbox" class="hobby" value="Reading"> Reading<br>
+    <input type="checkbox" class="hobby" value="Traveling"> Traveling<br>
+    <input type="checkbox" class="hobby" value="Gaming"> Gaming<br>
+    <input type="checkbox" class="hobby" value="Cooking"> Cooking<br><br>
+     <div id="result1"></div>
+    <button onclick="getHobbies()">Submit</button>
+
+    <script>
+        //with function button
+        /*function getHobbies(){
+            let selected=[]
+            const selectedHobbies= document.querySelectorAll(".hobby");
+            selectedHobbies.forEach(cb=>{
+                if(cb.checked){
+                    selected.push(cb.value)
+                }
+                
+             })
+             console.log(selected)
+             const data = { hobbies: selected };
+             console.log(data.hobbies);
+        }*/
+        // without btn 
+        const checkboxes = document.querySelectorAll(".hobby");
+
+        checkboxes.forEach(cbv=>{
+            cbv.addEventListener("change", updateHobbies)
+        })
+        function updateHobbies(){
+            const selected=[];
+            selectedCheckboxvalues=document.querySelectorAll('.hobby:checked');
+
+           selectedCheckboxvalues.forEach(cb=>{
+            selected.push(cb.value)
+
+           })
+           document.getElementById("result1").innerText=selected;
+           console.log(selected)
+
+        }
+       
+    </script>
+</body>
+</html>

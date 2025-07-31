@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .all {
+        height: 200px;
+        width: 200px;
+        border: 1px solid gray;
+        float: right;
+        padding: 20px;
+        margin: 20px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="langForm">
+      <input type="radio" id="js" name="language" value="JavaScript" />
+      <label for="js">JavaScript</label><br />
+
+      <input type="radio" id="py" name="language" value="Python" />
+      <label for="py">Python</label><br />
+
+      <input type="radio" id="java" name="language" value="Java" />
+      <label for="java">Java</label><br />
+    </form>
+
+    <button onclick="getSelectedLanguage()">Submit</button>
+    <script>
+      function getSelectedLanguage() {
+        const radioBtn = document.querySelector('input[name="language"]:checked').value;
+        alert(radioBtn);
+      }
+    </script>
+    <hr />
+    <div>
+      <input type="radio" id="one" name="language"  value="blue" onclick="showdiv(this)" />blue
+      <input type="radio"  id="two"  name="language"  value="green"  onclick="showdiv(this)"/>green
+      <input type="radio"   id="three" name="language" value="yellow"  onclick="showdiv(this)" />yellow
+
+      <div class="all blue">blue</div>
+      <div class="all green">green</div>
+      <div class="all yellow">yellow</div>
+      <script>
+        function showdiv(radio) {
+          const allDivs = document.querySelectorAll(".all");
+
+          // Hide all boxes first
+          allDivs.forEach((div) => (div.style.display = "none"));
+
+          // Show the selected one
+          const selectedDiv = document.querySelector("." + radio.value);
+          if (selectedDiv) {
+            selectedDiv.style.display = "block";
+          }
+        }
+      </script>
+    </div>
+
+    <hr style="clear: both" />
+
+    <h3>Select Gender:</h3>
+<input type="radio" name="gender" value="Male" onclick="getGender()"> Male
+<input type="radio" name="gender" value="Female" onclick="getGender()"> Female
+<input type="radio" name="gender" value="Other" onclick="getGender()"> Other
+
+<p id="selectedGender"></p>
+
+<script>
+    function getGender(){
+        const selectedgender=document.querySelector('input[name="gender"]:checked').value;
+        if(selectedgender=="Male"){
+           document.getElementById('selectedGender').innerText=selectedgender;
+        } else if(selectedgender=="Female") {
+            document.getElementById('selectedGender').innerText=selectedgender;
+        } else {
+            document.getElementById('selectedGender').innerText=selectedgender;
+        }
+    }
+
+</script>
+
+    
+  </body>
+</html>

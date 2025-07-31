@@ -2,30 +2,59 @@
 <html>
 <head>
   <title>Login Form</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   
   <style>
-  .parent{
-     display: flex;
-	 border:1px solid red;
-	 margin:20px;
-	 flex-wrap:wrap;
+  .parent {
+    display: flex;
+    border: 1px solid red;
+    margin: 20px;
+    justify-content: center;
+    align-items: stretch; /* stretch children to equal height */
+    gap: 10px; /* optional spacing between children */
+    flex-wrap: wrap; /* allow wrapping on small screens */
   }
-  .child{
-  margin:20px;
-     width:150px;border:1px solid gray;
-	 padding:10px
+
+  .child {
+    
+    width: 250px;
+    border: 1px solid gray;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  /* vertical center */
+    align-items: center;      /* horizontal center */
+    text-align: center;
   }
   </style>
 </head>
 <body>
 
 <div class="parent">
-   <div class="child">child <p>dccvdacva dacacvad dcdvas</p><p>dccvdacva dacacvad dcdvas</p><p>dccvdacva dacacvad dcdvas</p></div>
-   <div class="child">child <p>dccvdacva dacacvad dcdvas</p></div>
-   <div class="child">child<p>dccvdacva dacacvad dcdvas</p><p>dccvdacva dacacvad dcdvas</p><p>dccvdacva dacacvad dcdvas</p><p>dccvdacva dacacvad dcdvas</p><p>dccvdacva dacacvad dcdvas</p></div>
-   <div class="child">child<p>dccvdacva dacacvad dcdvas</p></div>
-
+   <div class="child">
+     child 
+     <p>dccvdacva dacacvad dcdvas</p>
+     <p>dccvdacva dacacvad dcdvas</p>
+     <p>dccvdacva dacacvad dcdvas</p>
+   </div>
+   <div class="child">
+     child 
+     <p>dccvdacva dacacvad dcdvas</p>
+   </div>
+   <div class="child">
+     child
+     <p>dccvdacva dacacvad dcdvas</p>
+     <p>dccvdacva dacacvad dcdvas</p>
+     <p>dccvdacva dacacvad dcdvas</p>
+     <p>dccvdacva dacacvad dcdvas</p>
+     <p>dccvdacva dacacvad dcdvas</p>
+   </div>
+   <div class="child">
+     child
+     <p>dccvdacva dacacvad dcdvas</p>
+   </div>
 </div>
+
 </body>
 </html>
