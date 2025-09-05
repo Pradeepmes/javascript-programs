@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World!</title>
+    <style>
+      body {
+        padding: 25px;
+      }
+      .red {
+        height: 100px;
+        width: 100px;
+        background: red;
+      }
+      .green {
+        height: 100px;
+        width: 100px;
+        background: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box1" class="red"></div>
+    <div id="box2" class="green"></div>
+    <button id="button">Toggle</button>
+
+    <script>
+      const box1 = document.getElementById("box1");
+      const box2 = document.getElementById("box2");
+      const button = document.getElementById("button");
+
+      button.addEventListener("click", () => {
+
+        box1.classList.toggle("red");
+        box1.classList.toggle("green");
+
+        box2.classList.toggle("red");
+        box2.classList.toggle("green");
+
+        /*if (box1.classList.contains("green")) {
+          box1.classList.replace("green", "red");
+          box2.classList.replace("red", "green");
+        } else {
+          box1.classList.replace("red", "green");
+          box2.classList.replace("green", "red");
+        }*/
+      });
+    </script>
+  </body>
+</html>

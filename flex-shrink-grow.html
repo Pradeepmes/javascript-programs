@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    
+  </style>
+</head>
+<body>
+    <h3>handling extra space</h3>
+    <div style="height:100px; display:flex; flex-direction:column;border: 1px solid red;">
+  <div style="height:10px; background:lightcoral;">Child 1</div>
+  <div style="height:30px; background:lightblue;">Child 2</div>
+  <div style="flex-grow:3; background:lightgreen;">Child 3</div>
+
+  <!--flex:1 or flex-grow:1 can be used with remaining space-->
+</div>
+
+
+<hr/>
+<h2>flex-grow :
+    This property defines how much a flex item should grow relative to the other flex items when there’s extra space in the container.
+
+Default value: 0 (items won’t grow unless specified)
+
+Higher number → grows more compared to others.
+</h2>
+<div style="display: flex;flex-direction: row; height: 100px; border: 1px solid black;">
+  <div style="flex-grow: 1; background: lightcoral;">A</div>
+  <div style="flex-grow: 2; background: lightblue;">B</div>
+  <div style="flex-grow: 1; background: lightgreen;">C</div>
+</div>
+  <hr>
+  <h2>2. flex-shrink
+This defines how much a flex item should shrink relative to the others when there isn’t enough space in the container.</h2>
+<div style="display: flex; width: 300px; border: 1px solid black;">
+  <div style="flex-shrink: 3; width: 200px; background: lightcoral;">A</div>
+  <div style="flex-shrink: 2; width: 200px; background: lightblue;">B</div>
+  <div style="flex-shrink: 2; width: 200px; background: lightgreen;">C</div>
+</div>
+</body>
+</html>

@@ -14,10 +14,20 @@
    <div id="result"></div>
   <script>
     
-    function getCheckboxValue(){
+   /* function getCheckboxValue(){
         const checkboxValue= document.querySelector('input[name="hobbies"]:checked').value;
              document.getElementById('result').innerText= checkboxValue;
-    }
+    }*/ // or below
+
+    const input=document.querySelector("input[name='hobbies']")
+
+    input.addEventListener('change',()=>{
+      if(input.checked){
+       document.getElementById('result').innerText= input.value;
+      }else{
+        document.getElementById('result').innerText= ""
+      }
+    })
   </script>
   <hr/>
     <h3>Select Hobbies:</h3>
@@ -29,6 +39,28 @@
     <button onclick="getHobbies()">Submit</button>
 
     <script>
+      const checkboxes=document.querySelectorAll('.hobby')
+       const selected=[]
+      
+      checkboxes.forEach(cb=>{
+       
+         cb.addEventListener("change",()=>{
+        
+          if(cb.checked){
+             alert(cb.value)
+             selected.push(cb.value)
+          }
+          document.getElementById('result1').innerText=selected;
+          console.log(selected)
+         })          
+      })
+      
+
+
+
+
+
+
         //with function button
         /*function getHobbies(){
             let selected=[]
@@ -44,23 +76,29 @@
              console.log(data.hobbies);
         }*/
         // without btn 
-        const checkboxes = document.querySelectorAll(".hobby");
+        /*const checkboxes = document.querySelectorAll(".hobby");
 
         checkboxes.forEach(cbv=>{
             cbv.addEventListener("change", updateHobbies)
         })
+
+
         function updateHobbies(){
             const selected=[];
-            selectedCheckboxvalues=document.querySelectorAll('.hobby:checked');
+            selectedCheckboxvalues=document.querySelectorAll('.hobby');
 
            selectedCheckboxvalues.forEach(cb=>{
+            if(cb.checked){
             selected.push(cb.value)
+           }
 
            })
            document.getElementById("result1").innerText=selected;
            console.log(selected)
 
-        }
+        }*/
+
+
        
     </script>
 </body>

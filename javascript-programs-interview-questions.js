@@ -183,9 +183,23 @@ filter:  for checking odd numbers -returns same no of array or less no of aray
 
 var arr=[10,20,40,23,30,40,33,30,50]
 
-const xyz=arr.filter(num=> num%2);
+const xyz=arr.filter(num=> num%2);  //even no
  
 console.log(xyz)
+
+odd no
+
+var arr=[10,20,40,23,30,40,33,30,50]
+
+const xyz=arr.filter(num=> num%2===1); //odd no
+ 
+console.log(xyz)  //returns 23
+
+
+even no
+var arr=[10,20,40,23,30,40,30,50]
+let xyz=arr.filter(num=>num%2===0)
+console.log(xyz)  
 =====================================
 find : returns only first matching element
 
@@ -206,7 +220,15 @@ for (var i = 0; i < arr.length; i++) {
 }
 
 console.log(uniqueArr); // 👉 Output: [1, 2, 3, 4, 5, 6]
+
 ===============================================
+Find Duplicates in an Array  using filter
+
+const arr = [1, 2, 3, 2, 4, 3, 5];
+
+const duplicates = arr.filter((item, index) => arr.indexOf(item) !== index);
+console.log([...new Set(duplicates)]); // [2, 3]
+================================================
 function flattenArray(arr) {
   let result = [];
 
@@ -270,7 +292,7 @@ function test(){
   }
 }
 
-console.log(test())  // message:'hello'
+console.log(test())  // { message: 'hello', value: '20' }
 ========================================
 
 filter country name starts with I
@@ -294,13 +316,7 @@ console.log(arr); // [4, 5, 1, 2, 3]
 
 //arr.push(arr.shift());
 ==========================================
-Find Duplicates in an Array
 
-const arr = [1, 2, 3, 2, 4, 3, 5];
-
-const duplicates = arr.filter((item, index) => arr.indexOf(item) !== index);
-console.log([...new Set(duplicates)]); // [2, 3]
-================================================
 
 Array Manipulation
 
@@ -312,7 +328,7 @@ const users = [
 ];
 
 const filtered=users.filter(user=> user.age > 25).sort((a,b)=>{
-  return a.name.localeCompare(b.name)
+  return a.name.localeCompare(b.name) //for sorting name and a.age-b.age
 })
 
 console.log(filtered)
@@ -372,19 +388,20 @@ for (let i = 0; i < keys.length; i++) {
 
 console.log(result);
 ==========================================
+//call ,apply bind
 
-function greet(gift){
-  console.log(this.name+" recieved a "+ gift)
+const person={
+  name:"Pradeep",
+  age:30
 }
+function greet(greeting,punchu){
+  console.log(`${greeting},${this.name},${punchu}`)
+}
+greet.call(person,"hello","!")
+greet.apply(person,["hello","!"])
+const greetfn=greet.bind(person,"hello","!")
+greetfn()
 
-const person1 = {name:"Pradeep"}
-const person2 = {name:"Sayunktha"}
-const person3 = {name:"Trishaan"}
-
-greet.call(person1,"tea set")
-greet.apply(person2,["Mug"]) 
-const gn=greet.bind(person3,"cup")
-gn()
 ====================================
  string methods 
  
@@ -649,25 +666,17 @@ function printVowels(str) {
     }
   }
 
-  console.log(result.join(', '));
-}
-
-// Example usage:
-printVowels("hellow world"); // Output: e, o, o
-     0r
-	 
-function printVowels(str) {
-  const matches = str.match(/[aeiou]/gi); // 'g' = global, 'i' = case-insensitive
-
-  if (matches) {
-    console.log(matches.join(', '));
+  if (result.length > 0) {
+    console.log(result.join(', '));
   } else {
-    console.log("No vowels found.");
+    console.log("no vowels found");
   }
 }
 
 // Example usage:
 printVowels("hellow world"); // Output: e, o, o
+printVowels("rhythm");       // Output: no vowels found
+
 ======================================================
 console.log('Start');
 
@@ -892,6 +901,194 @@ let a=1;
 console.log((+f)+a+1)  //10
 ==================================
 
+function sum(a, b) {
+  if (b !== undefined) {
+    return a + b; // Handles sum(2, 3)
+  } else {
+    return function(c) {
+      return a + c; // Handles sum(2)(3)
+    };
+  }
+}
+
+console.log(sum(2, 3));  // Output: 5
+console.log(sum(2)(3));  // Output: 5
+====================================
+
+const arr = ["cat", "act", "tac", "bat", "abt"];
+
+const grouped = {};
+
+arr.forEach(word => {
+  const sorted = word.split('').sort().join('');
+  if (grouped[sorted]) {
+    grouped[sorted].push(word);
+  } else {
+    grouped[sorted] = [word];
+  }
+});
+
+const result = Object.values(grouped);
+
+console.log(result); // [["cat", "act", "tac"], ["bat", "abt"]]
+===============================================
+
+let a=["name","age","place"];
+let b=["pradeep","27","blore"]
+
+let result={};
+for(let i=0;i<a.length;i++){
+    result[a[i]]=b[i]
+}
+
+console.log(result);
+=============================================
+
+let arr = [1, 2, 1, 2, 1, 3, 4, 3, 5];
+
+let op = arr.reduce((acc, curr) => {
+  acc[curr] = (acc[curr] || 0) + 1;
+  return acc;
+}, {});
+
+console.log(op);
+
+=============================================
+var str = " this is a pradeep";
+
+let newtext=str.trim().split(" ")
+console.log(newtext)
+let transformed=[]
+newtext.forEach(str=>{
+    transformed.push(str.charAt(0).toUpperCase()+str.slice(1))
+})
+console.log(transformed.join(' ')) //This Is A Pradeep
+
+  or
+  
+var str = " this is a pradeep";
+
+let newtext = str.trim().split(" ");
+let transformed = newtext.map(word => {
+  if (word.length === 1) {
+    return word.toUpperCase(); // single letter word like "a"
+  }
+  return (
+    word.charAt(0).toUpperCase() +           // first letter uppercase
+    word.slice(1, -1) +                      // middle part unchanged
+    word.charAt(word.length - 1).toUpperCase() // last letter uppercase
+  );
+});
+
+console.log(transformed.join(" ")); // ThiS IS A PradeeP
+
+==================================================
+function largestUniqueSubstring(str) {
+  let longest = "";
+  
+  for (let i = 0; i < str.length; i++) {
+    let current = "";
+    for (let j = i; j < str.length; j++) {
+      if (current.includes(str[j])) {
+        break; // stop if character repeats
+      }
+      current += str[j];
+      if (current.length > longest.length) {
+        longest = current;
+      }
+    }
+  }
+  
+  return longest;
+}
+
+console.log(largestUniqueSubstring("pradeep")); // "prade"
+console.log(largestUniqueSubstring("akash"));   // "kash"
+==========================================================
+
+function sum(...args) {
+    return args.reduce((acc, curr) => acc + curr, 0);
+}
+
+// Test cases
+console.log(sum(2, 3));        // Output: 5
+console.log(sum(5, 6, 7));     // Output: 18
+console.log(sum(1, 2, 3, 4));  // Output: 10
+console.log(sum());            // Output: 0
+===================================================
+
+const input = [1, "sun", 600, "moon", "earth", "456"];
+
+const strings = input.filter(item => typeof item === "string").sort();
+const numbers = input.filter(item => typeof item === "number").sort((a, b) => a - b);;
+
+const output = [...strings, ...numbers];
+console.log(output); // ['earth', 'moon', 'sun', 1, '456', 600]
+
+
+0r
+const input = [1, "sun", 600, "moon", "earth", "456"];
+
+const strings=input.filter(x => isNaN(x)).sort((a, b) => b.localeCompare(a));
+const numbers=input
+              .filter(x=>!isNaN(x))
+              .sort((a,b)=>Number(a)- Number(b))
+console.log([...strings,...numbers])
+============================================================
+
+console.log(firstNonRepeatingCharacter("pradeep")); // w
+
+function  firstNonRepeatingCharacter(str){
+    for(let char of str){
+        if(str.indexOf(char)===str.lastIndexOf(char)){
+            return char
+        }
+    }
+}
+
+===================================================
+async function chart(v){
+  console.log("start",v)
+  await console.log("middle",v)
+  console.log("end",v)
+}
+
+chart("first")
+chart("second")
+
+0p start
+first
+middle
+first
+start
+second
+middle
+second
+end
+first
+end
+second
+=======================================================
+let employees=[
+    {name:"Kareem", salary:5000},
+    {name:"ali", salary:7000},
+    {name:"Mohammed", salary:8000},
+    ]
+const filtermap= employees.filter(item=> item.salary> 6000).map(item=>item.name)
+console.log(filtermap)
+
+//using flatMap   combines both filter and map method
+const flatmap= employees.flatMap(item=> item.salary> 6000 ? item.name:[])
+console.log(flatmap)
+
+
+
+
+
+
+========================================================
+https://stackblitz.com/edit/vitejs-vite-g9qauc67?file=src%2FApp.tsx
+
 javascript methods
 
 https://www.linkedin.com/feed/update/urn:li:groupPost:8571393-7347823330550280192?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
@@ -912,4 +1109,8 @@ https://www.linkedin.com/posts/vinothkumar-j-dev_master-and-crack-the-interview-
 https://www.linkedin.com/posts/theabdul-rehman345_new-react-hooks-19-activity-7355816863504736260-o2ZQ?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
 
 https://www.linkedin.com/feed/update/urn:li:groupPost:10487081-7353048821502787584?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
+
+https://www.linkedin.com/posts/rakeshkoka_event-loop-in-javascript-activity-7356000749371187200-1vyg?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
+
+https://www.linkedin.com/posts/vvs-vamsi-krishna-55462628b_top-20-javascript-interview-questioms-activity-7361581563827924992-1dij?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
 ===================================

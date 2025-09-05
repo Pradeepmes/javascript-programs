@@ -69,7 +69,7 @@
 <p id="selectedGender"></p>
 
 <script>
-    function getGender(){
+   /* function getGender(){
         const selectedgender=document.querySelector('input[name="gender"]:checked').value;
         if(selectedgender=="Male"){
            document.getElementById('selectedGender').innerText=selectedgender;
@@ -78,7 +78,17 @@
         } else {
             document.getElementById('selectedGender').innerText=selectedgender;
         }
-    }
+    }*/  //or below
+
+    const radiobtn=document.querySelectorAll('input[name="gender"]')
+
+    radiobtn.forEach(rb=>{
+      rb.addEventListener('click',()=>{
+        if(rb.checked){
+          alert(rb.value)
+        }
+      })
+    })
 
 </script>
 

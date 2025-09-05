@@ -18,6 +18,15 @@ $(document).ready(function(){
 });
   });*/
   
+
+  $.ajax({
+    method:"GET",
+    url:'https://jsonplaceholder.typicode.com/posts',
+    success:function(data){
+      console.log(data)
+    }
+
+  })
   
   let fact=1;
   for(let i=5;i>0;i--){

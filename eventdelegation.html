@@ -54,7 +54,7 @@
     const child = document.getElementById('child');
     const grandchild = document.getElementById('grandChild');
 
-   /* parent.addEventListener('click', function(e) {
+    parent.addEventListener('click', function(e) {
       console.log('Parent - Capturing');
     }, true); // capturing
 
@@ -65,18 +65,24 @@
     grandchild.addEventListener('click', function(e) {
       console.log('GrandChild - Capturing');
     }, true); // capturing */
-    console.log("---------------------")
-    grandchild.addEventListener('click', function(e) {
-      console.log('GrandChild - Bubbling');
-    }); // bubbling
 
+
+    console.log("---------------------")
+/*
+    parent.addEventListener('click', function(e) {
+      console.log('Parent - Bubbling');
+    }); // bubbling 
+    
     child.addEventListener('click', function(e) {
       console.log('Child - Bubbling');
     }); // bubbling
 
-    parent.addEventListener('click', function(e) {
-      console.log('Parent - Bubbling');
-    }); // bubbling 
+    grandchild.addEventListener('click', function(e) {
+      console.log('GrandChild - Bubbling');
+    }); // bubbling
+
+*/
+    
   </script>
 </body>
 </html>

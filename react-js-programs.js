@@ -368,9 +368,6 @@ import React, { createContext, useState } from "react";
 
 export const CartContext = createContext();
 
-
-
-
 export const CartProvider = ({ children }) => {
 	
 	 const [cartItems, setCartItems] = useState([]);
@@ -498,13 +495,6 @@ function Allinone() {
   const [error, setError] = useState(false);
   const [isLoggedin, setLoggedIn] = useState(true);
 
-  useEffect(() => {
-    console.log("loaded later");
-  }, []);
-
-  useLayoutEffect(() => {
-    console.log("use Layout will load first");
-  }, []);
 
   function renderLoginStatus() {
     if (isLoggedin) return <div>loggedIn</div>;
@@ -526,6 +516,33 @@ function Allinone() {
 
 export default Allinone;
 ============================================================
+import React from 'react';
+import {
+  useEffect,
+  useState,
+  useLayoutEffect,
+  useInsertionEffect,
+} from 'react';
+
+function Lifecycle() {
+  useEffect(() => {
+    console.log('use effect - Runs after painting to the screen (async).-Doesn’t block the UI render');
+  }, []);
+  useLayoutEffect(() => {
+    console.log('use layout effect- Runs synchronously after DOM mutations but before the browser paints.');
+  }, []);
+  useInsertionEffect(() => {
+    console.log('use insertion 1effect- Runs even before useLayoutEffect → intended for libraries that inject styles into the DOM.');
+  }, []);
+
+  return (
+    <div>
+      <h1>xcxc</h1>
+    </div>
+  );
+}
+
+export default Lifecycle;
 ====================toggle button====================
 
 import React from 'react'
@@ -574,10 +591,10 @@ function useWindowsize() {
 
   return size;
 }
-    
-	and import in any component file
 export default useWindowsize;
 
+
+//and import in any component file
 
 import React from 'react'
 import useWindowsize from './useWindowsize'
@@ -828,6 +845,56 @@ export default Reactmemochild;
 app.js
 
    <Reactmemoparent/>
+============================================================
+Usememo
+//The filter logic runs only when search changes.
+
+//If other state changes (like theme toggle, counter, etc.), React uses the cached result from the previous calculation.
+
+//Saves performance for expensive operations (big lists, complex filtering, sorting, calculations).
+
+import React, { useState, useMemo } from 'react';
+
+const users = ['Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Frank', 'Grace'];
+
+export default function Usememo() {
+  const [search, setSearch] = useState('');
+  const [theme, setTheme] = useState(false);
+
+  // ✅ Only recomputes when search changes
+  const filteredUsers = useMemo(() => {
+    console.log('Filtering users...');
+    return users.filter((user) =>
+      user.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [search]);
+
+  return (
+    <div
+      style={{
+        padding: '20px',
+        background: theme ? 'black' : 'white',
+        color: theme ? 'white' : 'black',
+      }}
+    >
+      <h2>Search Users</h2>
+      <input
+        type="text"
+        placeholder="Search..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+
+      <button onClick={() => setTheme(!theme)}>Toggle Theme</button>
+
+      <ul>
+        {filteredUsers.map((user, idx) => (
+          <li key={idx}>{user}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 
 =============================================================
@@ -982,13 +1049,7 @@ function throttle(func, limit) {
 =================================================
 React-router
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
-
+import {BrowserRouter as Router,Routes,Route,useLocation,} from "react-router-dom";
 
 app.js
 
@@ -1034,3 +1095,301 @@ import { useNavigate } from 'react-router-dom';
 if(){
 	navigate('/home');
 }
+===================================================
+lazy loading
+
+
+import { lazy,Suspense } from "react";
+
+
+const Login = lazy(() => import("./pages/Login"));
+
+function App() {
+  return (
+    <div className="App">
+      
+      
+         <Suspense fallback={<div>Loading...</div>}>
+             <home/>
+         </Suspense>
+        
+    </div>
+  );
+}
+
+==================================================================
+STOP timer
+
+import React, { useRef } from "react";
+import { useState } from "react";
+
+const Stopcounter = () => {
+  const [count, setCount] = useState(0);
+  const counterRef = useRef(null);
+
+  const startcounter = () => {
+    if (counterRef.current) return;
+    counterRef.current = setInterval(() => {
+      setCount((prev) => prev + 1);
+    }, 1000);
+  };
+  const stopcouunter = () => {
+    clearInterval(counterRef.current);
+    counterRef.current = null;
+  };
+  const resetcounter = () => {
+    stopcouunter();
+    setCount(0);
+  };
+  return (
+    <div>
+      {count}
+      <button onClick={startcounter}>start counter</button>
+      <button onClick={stopcouunter}>stop counter</button>
+      <button onClick={resetcounter}>reset counter</button>
+    </div>
+  );
+};
+
+export default Stopcounter;
+=================================================================
+Modal
+
+app.js
+import React from 'react';
+import './style.css';
+import Modal from './Modal';
+import './modal.css';
+import { useState } from 'react';
+
+export default function App() {
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+  return (
+    <div>
+      <h1>Hello StackBlitz!</h1>
+      <p>Start editing to see some magic happen :)</p>
+      <button onClick={openModal}>Show Modal</button>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title="Dynamic Modal Header"
+      >
+        <p>This is the dynamic modal body content.</p>
+        <p>You can pass anything as children.</p>
+      </Modal>
+    </div>
+  );
+}
+
+modal.js
+
+import React from 'react';
+
+const Modal = ({ isOpen, onClose, title, children }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-header">
+          {title}
+          <button className="modal-close" onClick={onClose}>
+            ×
+          </button>
+        </div>
+        <div className="modal-body">{children}</div>
+      </div>
+    </div>
+  );
+};
+
+export default Modal;
+=========================================================================
+date timer
+
+import React, { useEffect, useState } from 'react';
+
+const Datetime = () => {
+  const [date, setDate] = useState(new Date());
+  useEffect(() => {
+    const timer = setInterval(() => {
+     setDate(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div>
+      <p>{date.toLocaleDateString()}</p>
+      <p>{date.toLocaleTimeString()}</p>
+
+      {date.toLocaleString()}
+    </div>
+  );
+};
+
+export default Datetime;
+
+==========================================================================
+
+import React from 'react';
+import { useEffect, useState } from 'react';
+export default function Lifecycle() {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    console.log('effect running');
+    return () => {
+      console.log('effect cleaning');
+    };
+  }, []);
+  return (
+    <div>
+      <h1>life</h1>
+      {count}
+      <button onClick={() => setCount(count + 1)}>click</button>
+    </div>
+  );
+}
+
+ 3 diff ops
+ 
+[] → run once (mount), cleanup only on unmount.
+
+No deps → run every render, cleanup before every rerun.
+
+[count] → run when count changes, cleanup before rerun.
+ 
+ 
+==============================================================
+
+use reducer
+
+import React, { useReducer } from "react";
+
+const initialState = { count: 0 };
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "increment":
+      return { count: state.count + 1 };
+    case "decrement":
+      return { count: state.count - 1 };
+    case "reset":
+      return initialState;
+    default:
+      return state;
+  }
+}
+
+const CounterWithReducer = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return (
+    <div>
+      <h2>useReducer Counter: {state.count}</h2>
+      <button onClick={() => dispatch({ type: "increment" })}>+</button>
+      <button onClick={() => dispatch({ type: "decrement" })}>-</button>
+      <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+    </div>
+  );
+};
+
+export default CounterWithReducer;
+
+===========================================================================================
+    Redux starts here
+===========================================================================================
+Redux is a predictable state management library for JavaScript applications
+
+it has 3 core concepts
+
+store: A single javascript object that holds the apps entire state
+actions: A plain javascript object that describes what happend
+reducers:  it is function that take the current state and action , and returns a new state.
+
+store.js
+
+import { configureStore } from '@reduxjs/toolkit';
+import counterReducer from './counterSlice';
+
+const store = configureStore({
+  reducer: {
+    counter: counterReducer,
+  },
+});
+
+export default store;
+
+counterSlice.js
+
+import { createSlice } from '@reduxjs/toolkit';
+
+const counterSlice = createSlice({
+  name: 'counter',
+  initialState: {
+    value: 0,
+  },
+  reducers: {
+    increment: (state) => {
+      state.value += 1;
+    },
+    decrement: (state) => {
+      state.value -= 1;
+    },
+  },
+});
+
+export const { increment, decrement } = counterSlice.actions;
+export default counterSlice.reducer;
+
+app.js
+
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { increment, decrement } from './counterSlice';
+
+function App() {
+  const count = useSelector((state) => state.counter.value);
+  const dispatch = useDispatch();
+
+  return (
+    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+      <h1>Counter: {count}</h1>
+      <button onClick={() => dispatch(increment())}>➕ Increment</button>
+      <button onClick={() => dispatch(decrement())}>➖ Decrement</button>
+    </div>
+  );
+}
+
+export default App;
+
+index.js
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import App from './App';
+import store from './store';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
+
+=================================================
+typescript
+
+TypeScript is a superset of JavaScript developed by Microsoft that adds static typing
+
+  feaures;
+ 1 static typing
+ 2 supports object oriented programming
+ 3. reusable type-safe functions.
+ 4. tooling support - vs code
+ 5. runs in any browser or we can use node.js

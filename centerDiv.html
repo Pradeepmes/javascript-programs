@@ -16,10 +16,41 @@ body {
   height: 100px;
   background: lightblue;
 }
+
+.parent{
+  
+  height: 300px;
+  width: 300px;
+  border: 1px solid gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:20px;
+  flex-wrap: wrap;
+ 
+  }
+.child{
+  height: 50px;
+  width: 50px;
+  border: 2px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
 
 </head>
 <body>
   <div class="abc"></div>
+
+
+  <div class="parent">
+    <div class="child">a</div>
+    <div class="child">b</div>
+    <div class="child">c</div>
+    <div class="child">a</div>
+    <div class="child">b</div>
+    <div class="child">c</div>
+  </div>
 </body>
 </html>
