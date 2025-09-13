@@ -161,7 +161,7 @@ bubble sort
 var arr=[10,20,40,30,40,30,50]
 
 for (var j=0;j<=arr.length;j++){
-  for(var i=0;i<=arr.length-1;i++){
+  for(var i=0;i<=arr.length;i++){
     if(arr[i]>arr[i+1]){
      var temp =arr[i]
       arr[i]=arr[i+1];
@@ -408,7 +408,7 @@ greetfn()
 let text = " ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
 
 text.length;//length
-text.split(' ').reverse().join(':')// split
+text.split(' ').reverse().join('')// split
 text.charAt(0)=="A" // find char at 0 pos - returns true/false
 
 text.indexOf("A")=== 0 // check  true/flase
@@ -780,7 +780,7 @@ console.log(lastTwo); // Output: ["Mango", "Orange"]
 const arr1=[1,2,3,4,5,6]
 
 const arr2=[7,8,9,10];
-const merged=arr1.concat(arr2)
+const merged=arr1.concat(arr2)   // correct method
 console.log(merged)  //  [1,2,3,4,5,6,7,8,9,10]
 
   or
@@ -788,7 +788,7 @@ console.log(merged)  //  [1,2,3,4,5,6,7,8,9,10]
 const arr1=[1,2,3,4,5,6]
 
 const arr2=[7,8,9,10];
-const merged=[...arr1,...arr2]
+const merged=[...arr1,...arr2]   // correct method
 console.log(merged)  //  [1,2,3,4,5,6,7,8,9,10]
 
 
@@ -966,44 +966,46 @@ console.log(transformed.join(' ')) //This Is A Pradeep
 
   or
   
-var str = " this is a pradeep";
+function capitalizeletter(str) {
+  let text = str.trim().split(' ');
 
-let newtext = str.trim().split(" ");
-let transformed = newtext.map(word => {
-  if (word.length === 1) {
-    return word.toUpperCase(); // single letter word like "a"
-  }
-  return (
-    word.charAt(0).toUpperCase() +           // first letter uppercase
-    word.slice(1, -1) +                      // middle part unchanged
-    word.charAt(word.length - 1).toUpperCase() // last letter uppercase
-  );
-});
+  let transformed = text.map(st => {
+    if (st.length === 1) {
+      return st.toUpperCase();
+    }
+    return (
+      st.charAt(0).toUpperCase() + // first letter
+      st.slice(1, -1) +            // middle part
+      st.charAt(st.length - 1).toUpperCase() // last letter
+  });
 
-console.log(transformed.join(" ")); // ThiS IS A PradeeP
+  return transformed.join(" ");
+}
+
+console.log(capitalizeletter("i am pradeep"));
+// Output: "ThiS IS A PradeeP"
+
 
 ==================================================
-function largestUniqueSubstring(str) {
-  let longest = "";
-  
-  for (let i = 0; i < str.length; i++) {
-    let current = "";
-    for (let j = i; j < str.length; j++) {
-      if (current.includes(str[j])) {
-        break; // stop if character repeats
+function largestUniqueSubstring(str){
+  let longest='';
+  for(let i=0;i<str.length;i++){
+    let current=''
+    for(let j=i;j<str.length;j++){
+      if(current.includes(str[j])){
+        break;
       }
-      current += str[j];
-      if (current.length > longest.length) {
-        longest = current;
+      current += str[j]
+      if(current.length > longest.length){
+        longest=current
       }
     }
   }
-  
-  return longest;
+  return longest
 }
+console.log(largestUniqueSubstring("pradeep")); 
+console.log(largestUniqueSubstring("akash")); 
 
-console.log(largestUniqueSubstring("pradeep")); // "prade"
-console.log(largestUniqueSubstring("akash"));   // "kash"
 ==========================================================
 
 function sum(...args) {
@@ -1023,17 +1025,17 @@ const strings = input.filter(item => typeof item === "string").sort();
 const numbers = input.filter(item => typeof item === "number").sort((a, b) => a - b);;
 
 const output = [...strings, ...numbers];
-console.log(output); // ['earth', 'moon', 'sun', 1, '456', 600]
+console.log(output); /
 
 
 0r
 const input = [1, "sun", 600, "moon", "earth", "456"];
 
-const strings=input.filter(x => isNaN(x)).sort((a, b) => b.localeCompare(a));
-const numbers=input
-              .filter(x=>!isNaN(x))
-              .sort((a,b)=>Number(a)- Number(b))
-console.log([...strings,...numbers])
+const strings=input.filter(x=> isNaN(x)).sort((a,b)=>a.localeCompare(b))
+const numbers=input.filter(x=>!isNaN(x)).sort()
+console.log(...strings,...numbers)
+
+// ['earth', 'moon', 'sun', 1, '456', 600]
 ============================================================
 
 console.log(firstNonRepeatingCharacter("pradeep")); // w
@@ -1114,3 +1116,71 @@ https://www.linkedin.com/posts/rakeshkoka_event-loop-in-javascript-activity-7356
 
 https://www.linkedin.com/posts/vvs-vamsi-krishna-55462628b_top-20-javascript-interview-questioms-activity-7361581563827924992-1dij?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA9Bj9EB9mKrGS8STUPtA26clFDMfDGdUgI
 ===================================
+
+
+promises:
+      
+	Promis.all : Waits for all promises to resolve. If any promise rejects, the whole thing fails immediately.
+	
+	const user = fetch('https://jsonplaceholder.typicode.com/users').then(res => res.json());
+	const post= fetch('https://jsonplaceholder.typicode.com/posts').then(res => res.json());
+
+	Promise.all([user,post])
+	.then(values => {
+		console.log(values); // values is an array of results
+	})
+    .catch(err => console.error(err));
+	
+	=====================================
+	Promise.allSettled  : returns settled one (if one req fail , then it will settled with success req)
+	
+	const user = fetch('https://jsonplaceholder.typicode.com/users').then(res => res.json());
+    const post= fetch('https://jsonplaceholder.typicode.com/posts').then(res => res.json());
+
+	Promise.allSettled([user,post])
+	.then(values => {
+    console.log(values); // values is an array of results
+	})
+   .catch(err => console.error(err));
+   
+   =========================================
+   
+   promise.race:  returns the first promise that settled fast
+   
+   // create a promise that delays the fetch
+	const user = new Promise((resolve, reject) => {
+	  setTimeout(() => {
+		fetch('https://jsonplaceholder.typicode.com/users')
+		  .then(res => res.json())
+		  .then(resolve)
+		  .catch(reject);
+	  }, 2000); // 2 seconds delay
+	});
+
+	const post = fetch('https://jsonplaceholder.typicode.com/posts').then(res => res.json());
+
+	Promise.race([user, post])
+	  .then(value => {
+		console.log(value); // value is the result of whichever resolves first
+	  })
+	  .catch(err => console.error(err));
+	  
+	 ==========================================
+	Promise.any: Waits for the first promise to fulfill (resolve).
+	
+	const user = fetch('https://jsonplaceholder.typicode.com/users').then(res => res.json());
+	const post= fetch('https://jsonplaceholder.typicode.com/posts').then(res => res.json());
+
+	Promise.any([user,post])
+	.then(values => {
+    console.log(values); // values is an array of results
+	})
+   .catch(err => console.error(err));
+
+
+
+
+
+
+
+

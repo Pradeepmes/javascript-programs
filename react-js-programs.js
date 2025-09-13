@@ -1,57 +1,85 @@
-1. todo List:
 
-import React from "react";
+========================================================================================================================
+1. todolist
 
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-function Newcounter() {
-  const todolistItems = [
-    { taskname: "task1", status: "pending" },
-    { taskname: "task2", status: "completed" },
-    { taskname: "task3", status: "completed" },
-    { taskname: "task4", status: "pending" },
-  ];
+function Todolistone() {
+  const [todolist, setTodolist] = useState([]);
+  const [input, setInput] = useState("");
 
-  const [todolist, setTodolist] = useState(todolistItems);
-  const [input, setInput] = useState();
-
-  const addTodolist = () => {
-    const newtask = {
-      id: 1,
+  const clickHandler = () => {
+    const newTask = {
       taskname: input,
-      status: "completed",
+      status: "pending",
     };
-    setTodolist([...todolist, newtask]);
+
+    setTodolist([...todolist, newTask]);
+    setInput("");
   };
 
+  useEffect(() => {
+    const storedTodos = localStorage.getItem("TodoListitem");
+    if (storedTodos) {
+      setTodolist(JSON.parse(storedTodos));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("TodoListitem", JSON.stringify(todolist));
+  });
+
+  const toggleStatus = (index) => {
+    const updatedList = [...todolist];
+    updatedList[index].status = updatedList[index].status === "pending" ? "completed" : "pending";
+    setTodolist(updatedList);
+  };
+  
   const deleteItem = (index) => {
-    const newTodos = [...todolist];
-    newTodos.splice(index, 1);
-    setTodolist(newTodos);
+    const newlist = [...todolist];
+    newlist.splice(index, 1);
+    setTodolist(newlist);
   };
 
   return (
     <div>
+      <h1>Todo List Task</h1>
+
       <input
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
-      ></input>
-      <button onClick={addTodolist}>add</button>
-      <br/>
-      {todolist.map((item, key) => (
-        <span key={key}>
-          {item.taskname}-{item.status}
-          <br /> <button onClick={() => deleteItem(key)}>delete</button>
-        </span>
-      ))}
+      />
+      <button onClick={clickHandler}>Add</button>
+
+      <ul>
+        {todolist.map((item, key) => (
+          <li key={key}>
+            <input
+              type="checkbox"
+              checked={item.status === "completed"}
+              onChange={() => toggleStatus(key)}
+            />
+            <span
+              style={{
+                textDecoration:
+                  item.status === "completed" ? "line-through" : "none",
+              }}
+            >
+              {item.taskname}
+            </span>
+            ({item.status})
+			<button onClick={() => deleteItem(key)}>delete</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
 
-export default Newcounter;
-========================================================================================================================
-========================================================================================================================
+export default Todolistone;
+
+=============================================================
 ========================================================================================================================
 
 2. button reusable components
@@ -124,7 +152,7 @@ function App(){
 }
 ========================================================================================================
 ========================================================================================================================
-Login form using async fetch with Post method
+4 Login form using async fetch with Post method
 
 import React from "react";
 import { useState } from "react";
@@ -190,7 +218,7 @@ function LoginForm() {
 
 export default LoginForm;
 =====================================================================================
-using axios with Post method
+5 using axios with Post method
 
 import React, { useState } from "react";
 import axios from "axios";
@@ -264,7 +292,7 @@ export default LoginForm;
 =========================================================================================
 =========================================================================================
 
-fetch method using fetch
+6. fetch method using fetch
 
 import React, { useEffect, useState } from "react";
 
@@ -314,7 +342,7 @@ function UserList() {
 export default UserList;
 ========================================================================================
 
-using axios to fetch data
+7. using axios to fetch data
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -360,7 +388,7 @@ export default UserList;
 
 ===================================================================
 ===================================================================
-context API  example
+8. context API  example
 
 CarContext.js
 
@@ -374,7 +402,7 @@ export const CartProvider = ({ children }) => {
 	
 	return(
 	
-	<CartContext.Provider value={{ someData }}>
+	<CartContext.Provider value={{ cartItems }}>
       {children}
     </CartContext.Provider>
 	
@@ -452,7 +480,7 @@ const Header = () => {
 
 export default Header;
 ==================================================
-component life cycle method
+9. component life cycle method
 
 import React from "react";
 import { useState, useEffect } from "react";
@@ -488,6 +516,7 @@ const CompLifeCycleMethod = () => {
 
 export default CompLifeCycleMethod;
 =======================================================
+10. uselayout
  import React, { useLayoutEffect, useState } from "react";
 import { useEffect } from "react";
 
@@ -516,6 +545,7 @@ function Allinone() {
 
 export default Allinone;
 ============================================================
+11. 
 import React from 'react';
 import {
   useEffect,
@@ -544,7 +574,7 @@ function Lifecycle() {
 
 export default Lifecycle;
 ====================toggle button====================
-
+12. 
 import React from 'react'
 import { useState } from 'react'
 
@@ -568,7 +598,7 @@ const Togglebutton = () => {
 export default Togglebutton
 ==========================================================
 
-custom hooks
+13. custom hooks
 
 // useWindowSize.js
 import { useState, useEffect } from "react";
@@ -610,7 +640,45 @@ const Samplewindow = () => {
 export default Samplewindow
 
 ============================================================
-debouncing with API search in client side
+import React, { useEffect, useState } from 'react'
+
+const useFetch = (url) => {
+  const [data,setData]=useState([])
+
+  useEffect(()=>{
+    fetch(url)
+    .then(res=>res.json())
+    .then(data=>setData(data))
+  },[url])
+ 
+    return {data}
+}
+
+export default useFetch
+
+import React from 'react'
+import useFetch from './useFetch'
+
+const Fetchapi = () => {
+
+  const {data}= useFetch('https://jsonplaceholder.typicode.com/users')
+  return (
+    <div>
+    <ul>
+      {data.map((user,key) => (
+        <li key={key}>{user.name}</li>
+      ))}
+    </ul>
+    </div>
+  )
+}
+
+export default Fetchapi
+
+last import Fetchapi in app.js
+
+============================================================
+14 . debouncing with API search in client side
 
 import React from "react";
 import { useState, useEffect } from "react";
@@ -661,7 +729,7 @@ const DebounceWithAPISearch = () => {
 
 export default DebounceWithAPISearch;
 ===============================================
-Debouncing with serach API with server side
+15. Debouncing with serach API with server side
 
 import React from "react";
 import { useState, useEffect } from "react";
@@ -712,79 +780,7 @@ const DebounceWithAPISearch = () => {
 
 export default DebounceWithAPISearch;
 ===============================================================
-todolist
 
-import React, { useEffect, useState } from "react";
-
-function Todolistone() {
-  const [todolist, setTodolist] = useState([]);
-  const [input, setInput] = useState("");
-
-  const clickHandler = () => {
-    const newTask = {
-      taskname: input,
-      status: "pending",
-    };
-
-    setTodolist([...todolist, newTask]);
-    setInput("");
-  };
-
-  useEffect(() => {
-    const storedTodos = localStorage.getItem("TodoListitem");
-    if (storedTodos) {
-      setTodolist(JSON.parse(storedTodos));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("TodoListitem", JSON.stringify(todolist));
-  });
-
-  const toggleStatus = (index) => {
-    const updatedList = [...todolist];
-    updatedList[index].status = updatedList[index].status === "pending" ? "completed" : "pending";
-    setTodolist(updatedList);
-  };
-
-  return (
-    <div>
-      <h1>Todo List Task</h1>
-
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <button onClick={clickHandler}>Add</button>
-
-      <ul>
-        {todolist.map((item, key) => (
-          <li key={key}>
-            <input
-              type="checkbox"
-              checked={item.status === "completed"}
-              onChange={() => toggleStatus(key)}
-            />
-            <span
-              style={{
-                textDecoration:
-                  item.status === "completed" ? "line-through" : "none",
-              }}
-            >
-              {item.taskname}
-            </span>
-            ({item.status})
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-export default Todolistone;
-
-=============================================================
 
 async function fetchUsers() {
     try {
@@ -1299,6 +1295,80 @@ const CounterWithReducer = () => {
 };
 
 export default CounterWithReducer;
+
+======================================================================
+useReducer for forms
+
+import React from 'react';
+import { useReducer } from 'react';
+
+const initialstate = {
+  name: '',
+  email: '',
+  age: '',
+};
+
+function formreducer(state, action) {
+  switch (action.type) {
+    case 'change-input':
+      return {
+        ...state,
+        [action.field]: action.value,
+      };
+    case 'reset':
+      return initialstate;
+  }
+}
+
+function Reducer() {
+  const [formState, dispatch] = useReducer(formreducer, initialstate);
+
+  const handleChange = (e) => {
+    dispatch({
+      type: 'change-input',
+      field: e.target.name,
+      value: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('✅ Form Submitted:', formState);
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        name
+        <input
+          type="text"
+          name="name"
+          value={formState.name}
+          onChange={handleChange}
+        />
+        email
+        <input
+          type="text"
+          name="email"
+          value={formState.email}
+          onChange={handleChange}
+        />
+        age{' '}
+        <input
+          type="text"
+          name="age"
+          value={formState.age}
+          onChange={handleChange}
+        />
+        <button type="submit">Submit</button>
+        <button onClick={() => dispatch({ type: 'reset' })}>Reset</button>
+      </form>
+    </div>
+  );
+}
+
+export default Reducer;
+
 
 ===========================================================================================
     Redux starts here
