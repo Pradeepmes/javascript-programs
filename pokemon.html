@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pokémon Dropdown</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    select {
+      padding: 5px;
+      margin-bottom: 20px;
+    }
+    .abilities {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background: #f9f9f9;
+      width: fit-content;
+    }
+  </style>
+</head>
+<body>
+  <h1>Pokémon Abilities</h1>
+  <label for="pokemonSelect">Choose a Pokémon:</label>
+  <select id="pokemonSelect">
+    <option value="">--Select--</option>
+  </select>
+
+  <div id="details"></div>
+
+  <script>
+    const select = document.getElementById("pokemonSelect");
+    const detailsDiv = document.getElementById("details");
+
+    // Cache to store fetched Pokémon details
+    const pokemonCache = {};
+
+    // Step 1: Fetch list of Pokémon
+    async function loadPokemonList() {
+      try {
+        const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=50");
+        const data = await res.json();
+
+        // Populate dropdown
+        data.results.forEach(pokemon => {
+          const option = document.createElement("option");
+          option.value = pokemon.url; // Store URL for fetching details
+          option.textContent = pokemon.name;
+          select.appendChild(option);
+        });
+      } catch (err) {
+        console.error("Error loading Pokémon list:", err);
+      }
+    }
+
+    // Step 2: Handle Pokémon selection
+    select.addEventListener("change", async (e) => {
+      const url = e.target.value;
+      if (!url) return;
+
+      if (pokemonCache[url]) {
+        // If cached, use stored details
+        displayDetails(pokemonCache[url]);
+      } else {
+        try {
+          const res = await fetch(url);
+          const data = await res.json();
+          pokemonCache[url] = data; // Save to cache
+          displayDetails(data);
+        } catch (err) {
+          console.error("Error fetching Pokémon details:", err);
+        }
+      }
+    });
+
+    // Step 3: Display details
+    function displayDetails(pokemon) {
+      detailsDiv.innerHTML = `
+        <h2>${pokemon.name.toUpperCase()}</h2>
+        <img src="${pokemon.sprites.front_default}" alt="${pokemon.name}">
+        <div class="abilities">
+          <strong>Abilities:</strong>
+          <ul>
+            ${pokemon.abilities.map(a => `<li>${a.ability.name}</li>`).join("")}
+          </ul>
+        </div>
+      `;
+    }
+
+    // Initialize
+    loadPokemonList();
+  </script>
+</body>
+</html>

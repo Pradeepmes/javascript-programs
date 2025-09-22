@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pokémon Dropdown</title>
+    <style></style>
+  </head>
+  <body>
+    <h1>Pokémon Abilities</h1>
+    <select id="pokemonSelect">
+      <option value="">--Select--</option>
+    </select>
+    <div id="details"></div>
+
+    <script>
+      const selectdrodown = document.getElementById("pokemonSelect");
+      const detailsDiv = document.getElementById("details");
+
+      async function getPokemonlist() {
+        try {
+          const res = await fetch("https://pokeapi.co/api/v2/pokemon/");
+          const data = await res.json();
+          console.log(data.results.slice(1, 10));
+          data.results.forEach((item) => {
+            const option = document.createElement("option");
+            option.value = item.url;
+            option.textContent = item.name;
+            selectdrodown.appendChild(option);
+          });
+        } catch (err) {}
+      }
+      getPokemonlist();
+
+      selectdrodown.addEventListener("change", function (e) {
+        const url = e.target.value;
+        console.log(url);
+        getsubDetails(url);
+      });
+
+      async function getsubDetails(url) {
+        try {
+          const res = await fetch(url);
+          const data = await res.json();
+          console.log("subdata", data);
+          displaysubdata(data);
+        } catch (err) {}
+      }
+
+      function displaysubdata(data){
+        detailsDiv.innerHTML=`<p><span>${data.name}</span>- </span></p>
+        <ul>
+            ${data.abilities.map(a => `<li>${a.ability.name}</li>`).join("")}
+          </ul>
+        `
+        
+
+      }
+    </script>
+  </body>
+</html>

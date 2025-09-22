@@ -9,7 +9,23 @@ const arr = [1, -1, 10, 20, 2, 3, 8]
 	note: if u want show second largest use console.log(output[1])
 	
 ========================================================
+(function() {
+  console.log("normal IIF");
+})(); 
 
+(()=>{
+    console.log("arrow IIF");
+})()
+// normal function
+function normal(a,b){
+  return a+b
+}
+console.log(normal(2,4))
+//arrow function
+const arrow=(a,b)=>{
+    return a+b
+}
+console.log(arrow(2,3))
 ========================================================
 sorting string inside array
 
@@ -591,7 +607,23 @@ users.forEach(user => {
 });
 
 console.log(groupedByAge);
-         and 
+        ---------------------
+		 example 2
+const input = [   { id: 1, name: "Alice", department: "Engineering" },
+{ id: 2, name: "Bob", department: "Sales" },
+{ id: 3, name: "Charlie", department: "Engineering" },
+{ id: 4, name: "David", department: "HR" }
+];
+
+const groupbydepartment={}
+
+input.forEach(user=>{
+    const key=user.department
+    groupbydepartment[key]= groupbydepartment[key] || []
+    groupbydepartment[key].push(user.name)
+})
+
+console.log(groupbydepartment)
 		 
 =================================================
 function foo(){
@@ -1082,14 +1114,54 @@ console.log(filtermap)
 //using flatMap   combines both filter and map method
 const flatmap= employees.flatMap(item=> item.salary> 6000 ? item.name:[])
 console.log(flatmap)
+=======================================================
+
+let users = [{
+    name: "A",
+    address: "ABC",
+    info: {
+        age: 24,
+        gender: "Male"
+    }
+}, {
+    name: "B",
+    address: "BCD",
+    info: {
+        age: 20,
+        gender: "Female"
+    }
+}, {
+    name: "C",
+    address: "CDE",
+}]
+
+let output = [];
+
+for (let user of users) {
+  if (user.info) {
+    let { name, address, info } = user;
+    output.push({ name, address, ...info });
+  } else {
+    output.push({ name: user.name, role: user.address });
+  }
+}
+
+console.log(output);
 
 
+
+result :
+[
+  { name: 'A', address: 'ABC', age: 24, gender: 'Male' },
+  { name: 'B', address: 'BCD', age: 20, gender: 'Female' },
+  { name: 'C', role: 'CDE' }
+]
 
 
 
 
 ========================================================
-https://stackblitz.com/edit/vitejs-vite-g9qauc67?file=src%2FApp.tsx
+https://stack	blitz.com/edit/vitejs-vite-g9qauc67?file=src%2FApp.tsx
 
 javascript methods
 

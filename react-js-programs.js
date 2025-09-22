@@ -1,6 +1,82 @@
+1. form data registration
+
+import React, { useState } from "react";
+
+const Formregistration = () => {
+  const [formdata, setFormdata] = useState({ name: "", email: "", age: "", dob: "", sex: "", hobbies: [], place: "" });
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    if (type === "checkbox" && name === "hobbies") {
+      setFormdata((prevdata) => checked ? { ...prevdata, hobbies: [...prevdata.hobbies, value] } : { ...prevdata, hobbies: prevdata.hobbies.filter((hobby) => hobby !== value) });
+    } else {
+      setFormdata((prevdata) => ({ ...prevdata, [name]: value }));
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form Submitted:", formdata);
+    alert(`Form Submitted!\n${JSON.stringify(formdata, null, 2)}`);
+  };
+
+  return (
+    <div>
+      <h1>Form Registration</h1>
+      <div style={{ display: "flex", flexDirection: "column", margin: "10px", justifyContent: "center", alignItems: "center" }}>
+        <form onSubmit={handleSubmit}>
+          name: <input type="text" name="name" value={formdata.name} onChange={handleChange} /> <br />
+          email: <input type="email" name="email" value={formdata.email} onChange={handleChange} /> <br />
+          age: <input type="number" name="age" value={formdata.age} onChange={handleChange} /> <br />
+          dob: <input type="date" name="dob" value={formdata.dob} onChange={handleChange} /> <br />
+          sex: <input type="radio" name="sex" value="male" checked={formdata.sex === "male"} onChange={handleChange} /> Male <input type="radio" name="sex" value="female" checked={formdata.sex === "female"} onChange={handleChange} /> Female <br />
+          hobbies: <input type="checkbox" name="hobbies" value="cricket" checked={formdata.hobbies.includes("cricket")} onChange={handleChange} /> cricket <input type="checkbox" name="hobbies" value="football" checked={formdata.hobbies.includes("football")} onChange={handleChange} /> football <input type="checkbox" name="hobbies" value="reading" checked={formdata.hobbies.includes("reading")} onChange={handleChange} /> reading <br />
+          place: <select name="place" value={formdata.place} onChange={handleChange}><option value="">--Select--</option><option value="hyd">hyd</option><option value="bang">bang</option><option value="chen">chen</option></select> <br />
+          <input type="submit" value="submit" />
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Formregistration;
+==================================================================
+forms using useRef
+
+import React from 'react'
+import { useRef } from "react"
+
+const Formsusinguseref = () => {
+   
+    const nameRef=React.useRef()
+    const emailRef=React.useRef()
+
+    const handlesubmit=(e)=>{
+        e.preventDefault();
+        const formdata={
+            name:nameRef.current.value,
+            email:emailRef.current.value,
+            hobbies:['cricket','football']
+        }
+        console.log("form submitted",formdata)
+        alert(`Form Submitted!\n${JSON.stringify(formdata, null, 2)}`);
+    }
+    
+  return (
+    <div>
+        <form onSubmit={handlesubmit}>
+            name: <input type="text" name="name" ref={nameRef} /> <br />
+            email: <input type="email" name="email" ref={emailRef} /> <br />
+            <button type="submit">submit</button>
+        </form>
+    </div>
+  )
+}
+
+export default Formsusinguseref
 
 ========================================================================================================================
-1. todolist
+2. todolist
 
 import React, { useEffect, useState } from "react";
 
@@ -82,7 +158,7 @@ export default Todolistone;
 =============================================================
 ========================================================================================================================
 
-2. button reusable components
+3. button reusable components
 
 callback functions React
  
@@ -849,6 +925,12 @@ Usememo
 
 //Saves performance for expensive operations (big lists, complex filtering, sorting, calculations).
 
+//  diff  between useMemo and useCallback
+
+useMemo: Memoize (cache) the result of a computation.
+
+useCallback: Memoize (cache) the function itself.
+
 import React, { useState, useMemo } from 'react';
 
 const users = ['Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Frank', 'Grace'];
@@ -1368,6 +1450,95 @@ function Reducer() {
 }
 
 export default Reducer;
+=========================================================
+import React from 'react';
+import './style.css';
+import { useState, useEffect } from 'react';
+
+export default function App() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setCount(count + 1);
+    setCount(count + 1);
+    setCount((prev) => prev + 1);
+  }, []);
+
+  const inc = () => {};
+
+  return <div>{count}</div>;
+}
+
+op: 2
+==================================================================
+
+import React, { useState, useEffect } from 'react';
+
+function Todolist() {
+  const [todolist, setTodolist] = useState([]);
+  const [input, setInput] = useState('');
+  const [editIndex, setEditIndex] = useState(null);
+
+  useEffect(() => {
+    const fetchusers = async () => {
+      try {
+        const res = await fetch('https://jsonplaceholder.typicode.com/todos/');
+        const data = await res.json();
+        setTodolist(data.slice(0, 10)); // limit to first 10 to keep UI small
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchusers();
+  }, []);
+
+  const editTitle = (index) => {
+    setInput(todolist[index].title);
+    setEditIndex(index);
+  };
+
+  const addOrUpdateItem = () => {
+    if (input.trim() === '') return;
+
+    if (editIndex !== null) {
+      // Update existing item
+      const updatedList = [...todolist];
+      updatedList[editIndex].title = input;
+      setTodolist(updatedList);
+      setEditIndex(null);
+    } else {
+      // Add new item
+      const newItem = { title: input };
+      setTodolist([...todolist, newItem]);
+    }
+
+    setInput('');
+  };
+
+  return (
+    <div>
+      <h1>Todolist</h1>
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+      <button onClick={addOrUpdateItem}>
+        {editIndex !== null ? 'Update' : 'Add'}
+      </button>
+
+      <ul>
+        {todolist.map((item, key) => (
+          <li key={key}>
+            {item.title} <button onClick={() => editTitle(key)}>Edit</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default Todolist;
 
 
 ===========================================================================================
